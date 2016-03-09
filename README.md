@@ -34,7 +34,7 @@ patch and build are known to work.
 3. Patch BoringSSL
 
     ```
-    $ cd boringssl && git am ../ossl-shim.patch
+    $ cd boringssl && git am ../ossl-shim.patch && cd ..
     ```
 
 4. Build and run tests
