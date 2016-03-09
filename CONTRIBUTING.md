@@ -27,5 +27,5 @@ OpenSSL directly, see
 
 ## Contributing to BoringSSL ##
 
-See [https://github.com/google/boringssl](https://github.com/google/boringssl).
+See [https://boringssl.googlesource.com/boringssl/+/HEAD/CONTRIBUTING.md](https://boringssl.googlesource.com/boringssl/+/HEAD/CONTRIBUTING.md).
 
