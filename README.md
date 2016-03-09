@@ -20,28 +20,28 @@ patch and build are known to work.
 
 1. Initialize the OpenSSL and BoringSSL submodules:
 
-```
-$ git submodule init
-$ git submodule update
-```
+    ```
+    $ git submodule init
+    $ git submodule update
+    ```
 
 2. Configure OpenSSL
 
-```
-$ cd openssl && ./config && cd ..
-```
+    ```
+    $ cd openssl && ./config && cd ..
+    ```
 
 3. Patch BoringSSL
 
-```
-$ cd boringssl && git am ../ossl-shim.patch
-```
+    ```
+    $ cd boringssl && git am ../ossl-shim.patch
+    ```
 
 4. Build and run tests
 
-```
-$ make test
-```
+    ```
+    $ make test
+    ```
 
 ## Other instructions ##
 
@@ -49,15 +49,15 @@ $ make test
 submodule directory and use git as usual, e.g., to pull the latest
 master:
 
-```
-$ git checkout master
-$ git pull
-```
+    ```
+    $ git checkout master
+    $ git pull
+    ```
 
 * To revert all local changes and bring the submodules back to the
 original state, do:
 
-```
-$ git submodule update
-```
+    ```
+    $ git submodule update
+    ```
 
