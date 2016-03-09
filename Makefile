@@ -1,9 +1,9 @@
-all: boringssl/ssl/test/ossl_shim
+all: ossl_shim
 
-boringssl/ssl/test/ossl_shim: openssl
+ossl_shim: openssl
 	g++ -std=c++11 -Iopenssl/include boringssl/ssl/test/*.cc \
 	openssl/libssl.a openssl/libcrypto.a -ldl -lpthread \
-	-o boringssl/ssl/test/ossl_shim
+	-o ossl_shim
 
 openssl: openssl/libssl.a openssl/libcrypto.a
 
@@ -15,8 +15,8 @@ openssl/libcrypto.a:
 
 test: all
 	cd boringssl/ssl/test/runner && \
-	go test -shim-path ../ossl_shim -pipe
+	go test -shim-path ../../../../ossl_shim -pipe
 
 clean:
 	cd openssl && make clean
-	rm boringssl/ssl/test/ossl_shim
+	rm ossl_shim
