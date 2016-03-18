@@ -1,4 +1,4 @@
-From aafdb0cf3086f82f3621e94a46c069d3bc42848e Mon Sep 17 00:00:00 2001
+From 05beae0459a820b2e3b97d7d5b50c354828b0c86 Mon Sep 17 00:00:00 2001
 From: David Benjamin <davidben@google.com>
 Date: Sat, 05 Mar 2016 11:56:13 -0500
 Subject: [PATCH] Make bssl_shim build against OpenSSL instead.
@@ -23,6 +23,11 @@ divergences.
 
 (The DH_get_2048_256 API difference seems to have been an mistake on our
 part when importing. I'll fix that one.)
+
+This test suite includes tests for RC4 and SSL3. To avoid some false positives,
+configure OpenSSL with:
+
+  enable-ssl3 enable-ssl3-method enable-weak-ssl-ciphers
 
 To build, cd into ssl/test and run:
 
@@ -155,7 +160,7 @@ index 7a5737b..965a0fb 100644
    "async bio",
    AsyncWrite,
 diff --git a/ssl/test/bssl_shim.cc b/ssl/test/bssl_shim.cc
-index f6c9d6a..41faf3d 100644
+index 7da64bb..7de6aa3 100644
 --- a/ssl/test/bssl_shim.cc
 +++ b/ssl/test/bssl_shim.cc
 @@ -16,9 +16,9 @@
@@ -205,19 +210,10 @@ index f6c9d6a..41faf3d 100644
    bool cert_ready = false;
    ScopedSSL_SESSION session;
    ScopedSSL_SESSION pending_session;
-@@ -138,152 +137,6 @@
-   return (TestState *)SSL_get_ex_data(ssl, g_state_index);
+@@ -154,143 +153,6 @@
+   return ScopedEVP_PKEY(PEM_read_bio_PrivateKey(bio.get(), NULL, NULL, NULL));
  }
  
--static ScopedEVP_PKEY LoadPrivateKey(const std::string &file) {
--  ScopedBIO bio(BIO_new(BIO_s_file()));
--  if (!bio || !BIO_read_filename(bio.get(), file.c_str())) {
--    return nullptr;
--  }
--  ScopedEVP_PKEY pkey(PEM_read_bio_PrivateKey(bio.get(), NULL, NULL, NULL));
--  return pkey;
--}
--
 -static int AsyncPrivateKeyType(SSL *ssl) {
 -  return EVP_PKEY_id(GetTestState(ssl)->private_key.get());
 -}
@@ -358,11 +354,8 @@ index f6c9d6a..41faf3d 100644
  template<typename T>
  struct Free {
    void operator()(T *buf) {
-@@ -293,122 +146,30 @@
- 
- static bool InstallCertificate(SSL *ssl) {
+@@ -303,24 +165,8 @@
    const TestConfig *config = GetConfigPtr(ssl);
--  TestState *test_state = GetTestState(ssl);
  
    if (!config->digest_prefs.empty()) {
 -    std::unique_ptr<char, Free<char>> digest_prefs(
@@ -387,26 +380,10 @@ index f6c9d6a..41faf3d 100644
 +    return false;
    }
  
--  if (!config->key_file.empty()) {
--    if (config->async) {
--      test_state->private_key = LoadPrivateKey(config->key_file.c_str());
--      if (!test_state->private_key) {
--        return false;
--      }
--      SSL_set_private_key_method(ssl, &g_async_private_key_method);
--    } else if (!SSL_use_PrivateKey_file(ssl, config->key_file.c_str(),
--                                        SSL_FILETYPE_PEM)) {
--      return false;
--    }
-+  if (!config->key_file.empty() &&
-+      !SSL_use_PrivateKey_file(ssl, config->key_file.c_str(),
-+                               SSL_FILETYPE_PEM)) {
-+    return false;
-   }
-   if (!config->cert_file.empty() &&
-       !SSL_use_certificate_file(ssl, config->cert_file.c_str(),
-                                 SSL_FILETYPE_PEM)) {
-     return false;
+   if (!config->key_file.empty()) {
+@@ -335,10 +181,8 @@
+       return false;
+     }
    }
 -  if (!config->ocsp_response.empty() &&
 -      !SSL_CTX_set_ocsp_response(ssl->ctx,
@@ -417,8 +394,24 @@ index f6c9d6a..41faf3d 100644
      return false;
    }
    return true;
- }
+@@ -354,10 +198,7 @@
+   if (pkey) {
+     TestState *test_state = GetTestState(ssl);
+     const TestConfig *config = GetConfigPtr(ssl);
+-    if (config->async) {
+-      test_state->private_key = std::move(pkey);
+-      SSL_set_private_key_method(ssl, &g_async_private_key_method);
+-    } else if (!SSL_use_PrivateKey(ssl, pkey.get())) {
++    if (!SSL_use_PrivateKey(ssl, pkey.get())) {
+       return false;
+     }
+   }
+@@ -367,58 +208,6 @@
+   }
  
+   return true;
+-}
+-
 -static int SelectCertificateCallback(const struct ssl_early_callback_ctx *ctx) {
 -  const TestConfig *config = GetConfigPtr(ctx->ssl);
 -  GetTestState(ctx->ssl)->early_callback_called = true;
@@ -469,8 +462,12 @@ index f6c9d6a..41faf3d 100644
 -    }
 -  }
 -  return 1;
--}
--
+ }
+ 
+ static int ClientCertCallback(SSL *ssl, X509 **out_x509, EVP_PKEY **out_pkey) {
+@@ -444,20 +233,6 @@
+ }
+ 
  static int VerifySucceed(X509_STORE_CTX *store_ctx, void *arg) {
 -  SSL* ssl = (SSL*)X509_STORE_CTX_get_ex_data(store_ctx,
 -      SSL_get_ex_data_X509_STORE_CTX_idx());
@@ -489,7 +486,7 @@ index f6c9d6a..41faf3d 100644
    return 1;
  }
  
-@@ -503,44 +264,11 @@
+@@ -552,44 +327,11 @@
    return config->psk.size();
  }
  
@@ -534,7 +531,7 @@ index f6c9d6a..41faf3d 100644
      return 0;
    }
    return 1;
-@@ -720,18 +448,12 @@
+@@ -769,18 +511,12 @@
      return nullptr;
    }
  
@@ -556,7 +553,7 @@ index f6c9d6a..41faf3d 100644
  
    if (config->use_sparse_dh_prime) {
      // This prime number is 2^1024 + 643 – a value just above a power of two.
-@@ -749,24 +471,14 @@
+@@ -798,24 +534,14 @@
      }
      BN_free(dh->q);
      dh->q = NULL;
@@ -581,9 +578,9 @@ index f6c9d6a..41faf3d 100644
 -  SSL_CTX_set_select_certificate_cb(ssl_ctx.get(), SelectCertificateCallback);
 +  SSL_CTX_set_session_cache_mode(ssl_ctx.get(), SSL_SESS_CACHE_BOTH);
  
-   SSL_CTX_set_next_protos_advertised_cb(
-       ssl_ctx.get(), NextProtosAdvertisedCallback, NULL);
-@@ -778,11 +490,6 @@
+   if (config->use_old_client_cert_callback) {
+     SSL_CTX_set_client_cert_cb(ssl_ctx.get(), ClientCertCallback);
+@@ -831,11 +557,6 @@
    if (!config->select_alpn.empty()) {
      SSL_CTX_set_alpn_select_cb(ssl_ctx.get(), AlpnSelectCallback, NULL);
    }
@@ -595,7 +592,7 @@ index f6c9d6a..41faf3d 100644
  
    SSL_CTX_set_info_callback(ssl_ctx.get(), InfoCallback);
    SSL_CTX_sess_set_new_cb(ssl_ctx.get(), NewSessionCallback);
-@@ -813,10 +520,8 @@
+@@ -866,10 +587,8 @@
      SSL_CTX_set_cert_verify_callback(ssl_ctx.get(), VerifySucceed, NULL);
    }
  
@@ -608,7 +605,7 @@ index f6c9d6a..41faf3d 100644
      return nullptr;
    }
  
-@@ -869,25 +574,8 @@
+@@ -922,25 +641,8 @@
      case SSL_ERROR_WANT_WRITE:
        AsyncBioAllowWrite(test_state->async_bio, 1);
        return true;
@@ -634,7 +631,7 @@ index f6c9d6a..41faf3d 100644
        return true;
      default:
        return false;
-@@ -978,11 +666,6 @@
+@@ -1031,11 +733,6 @@
      }
    }
  
@@ -646,7 +643,7 @@ index f6c9d6a..41faf3d 100644
    if (!config->expected_server_name.empty()) {
      const char *server_name =
          SSL_get_servername(ssl, TLSEXT_NAMETYPE_host_name);
-@@ -1030,50 +713,6 @@
+@@ -1083,50 +780,6 @@
      }
    }
  
@@ -697,7 +694,7 @@ index f6c9d6a..41faf3d 100644
    if (config->expect_verify_result) {
      int expected_verify_result = config->verify_fail ?
        X509_V_ERR_APPLICATION_VERIFICATION :
-@@ -1081,24 +720,6 @@
+@@ -1134,24 +787,6 @@
  
      if (SSL_get_verify_result(ssl) != expected_verify_result) {
        fprintf(stderr, "Wrong certificate verification result\n");
@@ -722,7 +719,7 @@ index f6c9d6a..41faf3d 100644
        return false;
      }
    }
-@@ -1147,6 +768,9 @@
+@@ -1199,6 +834,9 @@
      } else if (!InstallCertificate(ssl.get())) {
        return false;
      }
@@ -732,7 +729,7 @@ index f6c9d6a..41faf3d 100644
    }
    if (config->require_any_client_certificate) {
      SSL_set_verify(ssl.get(), SSL_VERIFY_PEER|SSL_VERIFY_FAIL_IF_NO_PEER_CERT,
-@@ -1156,10 +780,8 @@
+@@ -1208,10 +846,8 @@
      SSL_set_verify(ssl.get(), SSL_VERIFY_PEER, NULL);
    }
    if (config->false_start) {
@@ -745,7 +742,7 @@ index f6c9d6a..41faf3d 100644
    }
    if (config->partial_write) {
      SSL_set_mode(ssl.get(), SSL_MODE_ENABLE_PARTIAL_WRITE);
-@@ -1177,17 +799,12 @@
+@@ -1229,17 +865,12 @@
      SSL_set_options(ssl.get(), SSL_OP_NO_SSLv3);
    }
    if (!config->expected_channel_id.empty()) {
@@ -767,7 +764,7 @@ index f6c9d6a..41faf3d 100644
    }
    if (!config->host_name.empty() &&
        !SSL_set_tlsext_host_name(ssl.get(), config->host_name.c_str())) {
-@@ -1208,44 +825,48 @@
+@@ -1260,44 +891,48 @@
      return false;
    }
    if (!config->srtp_profiles.empty() &&
@@ -828,7 +825,7 @@ index f6c9d6a..41faf3d 100644
    }
    if (config->p384_only) {
      int nid = NID_secp384r1;
-@@ -1294,18 +915,17 @@
+@@ -1346,18 +981,17 @@
        if (SSL_set_session(ssl.get(), session) != 1) {
          return false;
        }
@@ -851,7 +848,7 @@ index f6c9d6a..41faf3d 100644
  
    int ret;
    if (config->implicit_handshake) {
-@@ -1335,11 +955,11 @@
+@@ -1387,11 +1021,11 @@
    if (config->export_keying_material > 0) {
      std::vector<uint8_t> result(
          static_cast<size_t>(config->export_keying_material));
@@ -865,7 +862,7 @@ index f6c9d6a..41faf3d 100644
        fprintf(stderr, "failed to export keying material\n");
        return false;
      }
-@@ -1349,23 +969,8 @@
+@@ -1401,23 +1035,8 @@
    }
  
    if (config->tls_unique) {
@@ -891,7 +888,7 @@ index f6c9d6a..41faf3d 100644
    }
  
    if (config->write_different_record_sizes) {
-@@ -1476,7 +1081,7 @@
+@@ -1528,7 +1147,7 @@
  
    if (SSL_total_renegotiations(ssl.get()) !=
        config->expect_total_renegotiations) {
@@ -900,7 +897,7 @@ index f6c9d6a..41faf3d 100644
              config->expect_total_renegotiations,
              SSL_total_renegotiations(ssl.get()));
      return false;
-@@ -1512,7 +1117,8 @@
+@@ -1564,7 +1183,8 @@
    signal(SIGPIPE, SIG_IGN);
  #endif
  
@@ -1001,26 +998,11 @@ index 75cfa13..61e6b25 100644
  #pragma warning(push, 3)
  #include <winsock2.h>
  #pragma warning(pop)
-diff --git a/ssl/test/runner/conn.go b/ssl/test/runner/conn.go
-index 5a19c28..30abcb3 100644
---- a/ssl/test/runner/conn.go
-+++ b/ssl/test/runner/conn.go
-@@ -1407,6 +1407,10 @@
- 		return nil, errors.New("tls: handshake has not yet been performed")
- 	}
- 
-+	if c.vers == VersionSSL30 {
-+		return nil, errors.New("tls: export keying material not supported in SSL 3.0.")
-+	}
-+
- 	seedLen := len(c.clientRandom) + len(c.serverRandom)
- 	if useContext {
- 		seedLen += 2 + len(context)
 diff --git a/ssl/test/runner/runner.go b/ssl/test/runner/runner.go
-index 061aee3..f224ca2 100644
+index e81786d..66b3f57 100644
 --- a/ssl/test/runner/runner.go
 +++ b/ssl/test/runner/runner.go
-@@ -796,6 +796,11 @@
+@@ -818,6 +818,11 @@
  
  	failed := err != nil || childErr != nil
  	correctFailure := len(test.expectedError) == 0 || strings.Contains(stderr, test.expectedError)
@@ -1032,7 +1014,7 @@ index 061aee3..f224ca2 100644
  	localError := "none"
  	if err != nil {
  		localError = err.Error()
-@@ -804,7 +809,7 @@
+@@ -826,7 +831,7 @@
  		correctFailure = correctFailure && strings.Contains(localError, test.expectedLocalError)
  	}
  
@@ -1041,35 +1023,8 @@ index 061aee3..f224ca2 100644
  		childError := "none"
  		if childErr != nil {
  			childError = childErr.Error()
-@@ -2494,7 +2499,7 @@
- 					},
- 				},
- 				shouldFail:    true,
--				expectedError: "SIGNATURE",
-+				expectedError: ":BAD_SIGNATURE:",
- 			})
- 		}
- 	}
-@@ -2520,7 +2525,7 @@
- 			},
- 		},
- 		shouldFail:    true,
--		expectedError: "DECRYPTION_FAILED_OR_BAD_RECORD_MAC",
-+		expectedError: ":DECRYPTION_FAILED_OR_BAD_RECORD_MAC:",
- 	})
- 	// OpenSSL previously had an issue where the first byte of padding in
- 	// 255 bytes of padding wasn't checked.
-@@ -2535,7 +2540,7 @@
- 		},
- 		messageLen:    12, // 20 bytes of SHA-1 + 12 == 0 % block size
- 		shouldFail:    true,
--		expectedError: "DECRYPTION_FAILED_OR_BAD_RECORD_MAC",
-+		expectedError: ":DECRYPTION_FAILED_OR_BAD_RECORD_MAC:",
- 	})
- }
- 
 diff --git a/ssl/test/test_config.cc b/ssl/test/test_config.cc
-index 95c85a8..81ebe28 100644
+index dfbd380..75b03f2 100644
 --- a/ssl/test/test_config.cc
 +++ b/ssl/test/test_config.cc
 @@ -20,7 +20,7 @@
@@ -1081,7 +1036,7 @@ index 95c85a8..81ebe28 100644
  
  namespace {
  
-@@ -175,15 +175,11 @@
+@@ -177,15 +177,11 @@
          fprintf(stderr, "Missing parameter\n");
          return false;
        }

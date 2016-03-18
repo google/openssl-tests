@@ -1,0 +1,2756 @@
+cd boringssl/ssl/test/runner && \
+	go test -shim-path ../../../../ossl_shim -pipe
+PASSED (NoFallbackSCSV)
+PASSED (BadECDSACurve)
+PASSED (BadECDSASignature-ClientAuth)
+PASSED (BadECDSASignature)
+PASSED (BadRSASignature)
+PASSED (SkipCertificateStatus)
+PASSED (NoClientCertificate)
+PASSED (SendFallbackSCSV)
+PASSED (ClientCertificateTypes)
+PASSED (SkipServerKeyExchange)
+PASSED (BadRSASignature-ClientAuth)
+PASSED (UnauthenticatedECDH)
+PASSED (SkipChangeCipherSpec-Server)
+PASSED (SkipChangeCipherSpec-Client)
+PASSED (Alert)
+PASSED (FragmentAcrossChangeCipherSpec-Server)
+PASSED (Alert-DTLS)
+PASSED (SkipChangeCipherSpec-Server-NPN)
+PASSED (FragmentAcrossChangeCipherSpec-Server-NPN)
+FAILED (FragmentAlert-DTLS)
+unexpected success: local error 'none', child error 'none', stdout:
+
+stderr:
+
+PASSED (FragmentAlert)
+PASSED (FragmentAcrossChangeCipherSpec-Client)
+PASSED (EarlyChangeCipherSpec-server-1)
+PASSED (FallbackSCSV)
+PASSED (HttpGET)
+PASSED (VersionTooLow)
+PASSED (FallbackSCSV-VersionMatch)
+PASSED (EarlyChangeCipherSpec-server-2)
+PASSED (HttpPUT)
+FAILED (SkipNewSessionTicket)
+bad error (wanted ':UNEXPECTED_RECORD:' / ''): local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+new session was not cached, but we expected the opposite
+
+PASSED (HttpHEAD)
+PASSED (HttpPOST)
+PASSED (MajorVersionTolerance)
+PASSED (MinorVersionTolerance)
+PASSED (DisableEverything-DTLS)
+PASSED (SkipCipherVersionCheck)
+PASSED (Garbage)
+PASSED (HttpCONNECT)
+PASSED (DisableEverything)
+PASSED (NoSharedCipher)
+PASSED (MTUExceeded)
+FAILED (MTU)
+unexpected failure: local error 'dtls: exceeded maximum packet length', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (FragmentedClientVersion)
+PASSED (CertMismatchRSA)
+FAILED (DTLSIgnoreBadPackets-Async)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (AppDataBeforeHandshake-DTLS)
+bad error (wanted ':UNEXPECTED_RECORD:' / ''): local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (AppDataBeforeHandshake)
+PASSED (EmptyCertificateList)
+PASSED (CertMismatchECDSA)
+PASSED (TLSFatalBadPackets)
+PASSED (DTLSIgnoreBadPackets)
+FAILED (AppDataBeforeHandshake-Empty)
+unexpected success: local error 'none', child error 'none', stdout:
+
+stderr:
+
+FAILED (AppDataBeforeHandshake-DTLS-Empty)
+unexpected success: local error 'none', child error 'none', stdout:
+
+stderr:
+
+FAILED (AppDataAfterChangeCipherSpec-Empty)
+unexpected success: local error 'none', child error 'none', stdout:
+
+stderr:
+
+PASSED (AppDataAfterChangeCipherSpec)
+FAILED (AlertAfterChangeCipherSpec-DTLS)
+bad error (wanted ':TLSV1_ALERT_RECORD_OVERFLOW:' / ''): local error 'tls: simulating post-CCS alert', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (AppDataAfterChangeCipherSpec-DTLS)
+unexpected failure: local error 'bad reply; length mismatch (12 vs 32)', child error 'none', stdout:
+
+stderr:
+
+PASSED (SendInvalidRecordType-DTLS)
+PASSED (SendInvalidRecordType)
+PASSED (FalseStart-SkipServerSecondLeg)
+PASSED (AlertAfterChangeCipherSpec)
+PASSED (AppDataAfterChangeCipherSpec-DTLS-Empty)
+PASSED (FalseStart-SkipServerSecondLeg-Implicit)
+PASSED (ReorderHandshakeFragments-Large-DTLS)
+FAILED (FragmentMessageLengthMismatch-DTLS)
+bad error (wanted ':FRAGMENT_MISMATCH:' / ''): local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (SplitFragments-Body-DTLS)
+PASSED (WrongMessageType)
+PASSED (SplitFragments-Header-DTLS)
+PASSED (SplitFragments-Boundary-DTLS)
+PASSED (WrongMessageType-DTLS)
+FAILED (FailEarlyCallback)
+unexpected success: local error 'none', child error 'none', stdout:
+
+stderr:
+
+FAILED (SendEmptyFragments-DTLS)
+unexpected failure: local error 'remote error: error decoding message', child error 'exit status 1', stdout:
+
+stderr:
+47412520881600:error:1418209F:SSL routines:dtls_process_hello_verify:length mismatch:ssl/statem/statem_clnt.c:995:
+
+PASSED (UnsupportedCipherSuite)
+PASSED (RSAEphemeralKey)
+PASSED (NoFalseStart-NoALPN)
+PASSED (NoFalseStart-NoAEAD)
+PASSED (NoFalseStart-RSA)
+PASSED (BadFinished-Server)
+PASSED (UnsupportedCurve)
+PASSED (FalseStart-BadFinished)
+PASSED (ReorderHandshakeFragments-Small-DTLS)
+FAILED (FragmentMessageTypeMismatch-DTLS)
+unexpected success: local error 'none', child error 'none', stdout:
+
+stderr:
+
+PASSED (NoFalseStart-DHE_RSA)
+PASSED (BadFinished-Client)
+FAILED (NoSupportedCurves)
+unexpected success: local error 'none', child error 'none', stdout:
+
+stderr:
+
+FAILED (SendSplitAlert-Async)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (SendSplitAlert-Sync)
+PASSED (NoRC4-DTLS)
+PASSED (SendWarningAlerts-Pass)
+FAILED (SendEmptyRecords-Async)
+unexpected success: local error 'none', child error 'none', stdout:
+
+stderr:
+
+PASSED (SendEmptyRecords-Pass)
+PASSED (SendWarningAlerts-DTLS-Pass)
+PASSED (SendEmptyRecords)
+PASSED (PackDTLSHandshake)
+FAILED (SendWarningAlerts-Async)
+unexpected success: local error 'none', child error 'none', stdout:
+
+stderr:
+
+FAILED (SendWarningAlerts)
+unexpected success: local error 'none', child error 'none', stdout:
+
+stderr:
+
+PASSED (Unclean-Shutdown-Ignored)
+PASSED (EmptySessionID)
+FAILED (Unclean-Shutdown)
+bad error (wanted 'Unexpected SSL_shutdown result: -1 != 1' / ''): local error 'none', child error 'exit status 1', stdout:
+
+stderr:
+Unexpected SSL_shutdown result: -1 != 1
+
+PASSED (LargePlaintext)
+PASSED (NoCommonCurves)
+PASSED (BadChangeCipherSpec-2)
+FAILED (BadChangeCipherSpec-1)
+unexpected success: local error 'none', child error 'none', stdout:
+
+stderr:
+
+PASSED (LargePlaintext-DTLS)
+PASSED (LargeCiphertext)
+PASSED (SendEmptySessionTicket)
+PASSED (BadChangeCipherSpec-DTLS-2)
+PASSED (BadHelloRequest-1)
+PASSED (BadChangeCipherSpec-DTLS-1)
+PASSED (InvalidECDHPoint-Client)
+FAILED (SSL3-3DES-SHA-client)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47042165374400:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+FAILED (SSL3-3DES-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47647262039488:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (InvalidECDHPoint-Server)
+PASSED (BadHelloRequest-2)
+PASSED (LargeCiphertext-DTLS)
+PASSED (SupportTicketsWithSessionID)
+PASSED (TLS1-3DES-SHA-server)
+PASSED (TLS1-3DES-SHA-client)
+PASSED (CheckLeafCurve)
+FAILED (DTLS1-3DES-SHA-server)
+unexpected failure: local error 'didResume is false, but we expected the opposite', child error 'exit status 1', stdout:
+
+stderr:
+session was not reused
+
+PASSED (TLS11-3DES-SHA-client)
+PASSED (TLS12-3DES-SHA-client)
+PASSED (DTLS1-3DES-SHA-client)
+PASSED (TLS12-3DES-SHA-server)
+PASSED (TLS11-3DES-SHA-server)
+PASSED (AES128-GCM-LargeRecord)
+PASSED (DTLS12-3DES-SHA-client)
+PASSED (TLS12-AES128-GCM-server)
+PASSED (TLS12-AES128-GCM-client)
+FAILED (SSL3-AES128-SHA-client)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47762561846720:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+PASSED (DTLS12-3DES-SHA-server)
+PASSED (DTLS12-AES128-GCM-client)
+FAILED (SSL3-AES128-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47172619320768:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (AES128-GCM-LargeRecord-DTLS)
+PASSED (3DES-SHA-LargeRecord)
+PASSED (DTLS12-AES128-GCM-server)
+PASSED (3DES-SHA-LargeRecord-DTLS)
+PASSED (TLS11-AES128-SHA-server)
+PASSED (TLS1-AES128-SHA-server)
+FAILED (DTLS1-AES128-SHA-server)
+unexpected failure: local error 'didResume is false, but we expected the opposite', child error 'exit status 1', stdout:
+
+stderr:
+session was not reused
+
+PASSED (TLS1-AES128-SHA-client)
+PASSED (TLS12-AES128-SHA-server)
+PASSED (DTLS1-AES128-SHA-client)
+PASSED (TLS11-AES128-SHA-client)
+PASSED (AES128-SHA-LargeRecord)
+PASSED (TLS12-AES128-SHA-client)
+PASSED (DTLS12-AES128-SHA-client)
+PASSED (TLS12-AES128-SHA256-server)
+PASSED (AES128-SHA-LargeRecord-DTLS)
+PASSED (DTLS12-AES128-SHA-server)
+PASSED (TLS12-AES128-SHA256-client)
+PASSED (DTLS12-AES128-SHA256-server)
+PASSED (AES128-SHA256-LargeRecord)
+PASSED (DTLS12-AES128-SHA256-client)
+PASSED (AES128-SHA256-LargeRecord-DTLS)
+PASSED (TLS12-AES256-GCM-server)
+FAILED (SSL3-AES256-SHA-client)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47844211543488:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+FAILED (SSL3-AES256-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47615929363904:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (AES256-GCM-LargeRecord)
+PASSED (TLS12-AES256-GCM-client)
+PASSED (TLS1-AES256-SHA-server)
+PASSED (AES256-GCM-LargeRecord-DTLS)
+PASSED (DTLS12-AES256-GCM-server)
+PASSED (DTLS12-AES256-GCM-client)
+PASSED (TLS11-AES256-SHA-client)
+PASSED (TLS12-AES256-SHA-client)
+FAILED (DTLS1-AES256-SHA-server)
+unexpected failure: local error 'didResume is false, but we expected the opposite', child error 'exit status 1', stdout:
+
+stderr:
+session was not reused
+
+PASSED (DTLS1-AES256-SHA-client)
+PASSED (TLS11-AES256-SHA-server)
+PASSED (AES256-SHA-LargeRecord)
+PASSED (DTLS12-AES256-SHA-server)
+PASSED (TLS12-AES256-SHA-server)
+PASSED (TLS1-AES256-SHA-client)
+PASSED (AES256-SHA-LargeRecord-DTLS)
+PASSED (DTLS12-AES256-SHA-client)
+PASSED (TLS12-AES256-SHA256-server)
+PASSED (AES256-SHA256-LargeRecord)
+PASSED (TLS12-AES256-SHA256-client)
+FAILED (SSL3-DHE-RSA-AES128-SHA-client)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47784083348928:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+FAILED (SSL3-DHE-RSA-AES128-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47808799722944:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (DTLS12-AES256-SHA256-client)
+PASSED (AES256-SHA256-LargeRecord-DTLS)
+PASSED (TLS12-DHE-RSA-AES128-GCM-client)
+PASSED (DTLS12-AES256-SHA256-server)
+PASSED (DTLS12-DHE-RSA-AES128-GCM-server)
+PASSED (TLS12-DHE-RSA-AES128-GCM-server)
+PASSED (DTLS12-DHE-RSA-AES128-GCM-client)
+PASSED (DHE-RSA-AES128-GCM-LargeRecord)
+PASSED (TLS1-DHE-RSA-AES128-SHA-client)
+PASSED (TLS11-DHE-RSA-AES128-SHA-client)
+PASSED (TLS1-DHE-RSA-AES128-SHA-server)
+PASSED (DHE-RSA-AES128-GCM-LargeRecord-DTLS)
+PASSED (DTLS1-DHE-RSA-AES128-SHA-client)
+PASSED (TLS12-DHE-RSA-AES128-SHA-client)
+PASSED (DHE-RSA-AES128-SHA-LargeRecord)
+PASSED (TLS11-DHE-RSA-AES128-SHA-server)
+PASSED (DTLS12-DHE-RSA-AES128-SHA-client)
+PASSED (DHE-RSA-AES128-SHA-LargeRecord-DTLS)
+PASSED (TLS12-DHE-RSA-AES128-SHA-server)
+PASSED (TLS12-DHE-RSA-AES128-SHA256-client)
+PASSED (DHE-RSA-AES128-SHA256-LargeRecord)
+PASSED (DTLS12-DHE-RSA-AES128-SHA256-client)
+PASSED (DHE-RSA-AES128-SHA256-LargeRecord-DTLS)
+PASSED (TLS12-DHE-RSA-AES128-SHA256-server)
+PASSED (DTLS12-DHE-RSA-AES128-SHA-server)
+PASSED (DTLS12-DHE-RSA-AES128-SHA256-server)
+PASSED (TLS12-DHE-RSA-AES256-GCM-client)
+FAILED (SSL3-DHE-RSA-AES256-SHA-client)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47895388552640:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+FAILED (SSL3-DHE-RSA-AES256-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47971307552192:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (DHE-RSA-AES256-GCM-LargeRecord)
+PASSED (DTLS12-DHE-RSA-AES256-GCM-client)
+PASSED (TLS12-DHE-RSA-AES256-GCM-server)
+PASSED (DTLS1-DHE-RSA-AES256-SHA-client)
+FAILED (DTLS1-DHE-RSA-AES128-SHA-server)
+unexpected failure: local error 'didResume is false, but we expected the opposite', child error 'exit status 1', stdout:
+
+stderr:
+session was not reused
+
+PASSED (TLS1-DHE-RSA-AES256-SHA-client)
+PASSED (DHE-RSA-AES256-GCM-LargeRecord-DTLS)
+PASSED (TLS1-DHE-RSA-AES256-SHA-server)
+PASSED (DTLS12-DHE-RSA-AES256-GCM-server)
+PASSED (DTLS12-DHE-RSA-AES256-SHA-client)
+PASSED (DHE-RSA-AES256-SHA-LargeRecord)
+PASSED (TLS12-DHE-RSA-AES256-SHA-client)
+PASSED (DTLS12-DHE-RSA-AES256-SHA-server)
+PASSED (DHE-RSA-AES256-SHA-LargeRecord-DTLS)
+PASSED (TLS11-DHE-RSA-AES256-SHA-server)
+PASSED (DTLS12-DHE-RSA-AES256-SHA256-client)
+PASSED (TLS12-DHE-RSA-AES256-SHA-server)
+PASSED (TLS11-DHE-RSA-AES256-SHA-client)
+PASSED (TLS12-ECDHE-ECDSA-AES128-GCM-client)
+PASSED (TLS12-ECDHE-ECDSA-AES128-GCM-server)
+PASSED (TLS12-DHE-RSA-AES256-SHA256-client)
+PASSED (SSL3-ECDHE-ECDSA-AES128-SHA-server)
+PASSED (TLS12-DHE-RSA-AES256-SHA256-server)
+PASSED (DTLS12-ECDHE-ECDSA-AES128-GCM-server)
+PASSED (DTLS12-ECDHE-ECDSA-AES128-GCM-client)
+PASSED (ECDHE-ECDSA-AES128-GCM-LargeRecord)
+PASSED (TLS1-ECDHE-ECDSA-AES128-SHA-server)
+PASSED (DHE-RSA-AES256-SHA256-LargeRecord-DTLS)
+PASSED (ECDHE-ECDSA-AES128-GCM-LargeRecord-DTLS)
+PASSED (DHE-RSA-AES256-SHA256-LargeRecord)
+PASSED (DTLS12-DHE-RSA-AES256-SHA256-server)
+FAILED (DTLS1-DHE-RSA-AES256-SHA-server)
+unexpected failure: local error 'didResume is false, but we expected the opposite', child error 'exit status 1', stdout:
+
+stderr:
+session was not reused
+
+PASSED (TLS1-ECDHE-ECDSA-AES128-SHA-client)
+PASSED (DTLS1-ECDHE-ECDSA-AES128-SHA-client)
+PASSED (TLS11-ECDHE-ECDSA-AES128-SHA-server)
+PASSED (TLS11-ECDHE-ECDSA-AES128-SHA-client)
+PASSED (TLS12-ECDHE-ECDSA-AES128-SHA-client)
+PASSED (DTLS12-ECDHE-ECDSA-AES128-SHA-client)
+FAILED (DTLS1-ECDHE-ECDSA-AES128-SHA-server)
+unexpected failure: local error 'didResume is false, but we expected the opposite', child error 'exit status 1', stdout:
+
+stderr:
+session was not reused
+
+PASSED (ECDHE-ECDSA-AES128-SHA-LargeRecord)
+PASSED (ECDHE-ECDSA-AES128-SHA-LargeRecord-DTLS)
+PASSED (TLS12-ECDHE-ECDSA-AES128-SHA-server)
+PASSED (DTLS12-ECDHE-ECDSA-AES128-SHA-server)
+PASSED (TLS12-ECDHE-ECDSA-AES128-SHA256-server)
+PASSED (TLS12-ECDHE-ECDSA-AES128-SHA256-client)
+PASSED (TLS12-ECDHE-ECDSA-AES256-GCM-client)
+PASSED (ECDHE-ECDSA-AES128-SHA256-LargeRecord)
+PASSED (ECDHE-ECDSA-AES128-SHA256-LargeRecord-DTLS)
+PASSED (TLS12-ECDHE-ECDSA-AES256-GCM-server)
+PASSED (SSL3-ECDHE-ECDSA-AES256-SHA-server)
+PASSED (ECDHE-ECDSA-AES256-GCM-LargeRecord)
+PASSED (DTLS12-ECDHE-ECDSA-AES128-SHA256-server)
+PASSED (DTLS12-ECDHE-ECDSA-AES256-GCM-client)
+PASSED (DTLS12-ECDHE-ECDSA-AES128-SHA256-client)
+PASSED (ECDHE-ECDSA-AES256-GCM-LargeRecord-DTLS)
+PASSED (DTLS12-ECDHE-ECDSA-AES256-GCM-server)
+PASSED (TLS12-ECDHE-ECDSA-AES256-SHA-server)
+PASSED (TLS1-ECDHE-ECDSA-AES256-SHA-server)
+PASSED (TLS11-ECDHE-ECDSA-AES256-SHA-client)
+PASSED (DTLS1-ECDHE-ECDSA-AES256-SHA-client)
+PASSED (DTLS12-ECDHE-ECDSA-AES256-SHA-client)
+PASSED (TLS1-ECDHE-ECDSA-AES256-SHA-client)
+PASSED (TLS12-ECDHE-ECDSA-AES256-SHA-client)
+FAILED (DTLS1-ECDHE-ECDSA-AES256-SHA-server)
+unexpected failure: local error 'didResume is false, but we expected the opposite', child error 'exit status 1', stdout:
+
+stderr:
+session was not reused
+
+PASSED (DTLS12-ECDHE-ECDSA-AES256-SHA-server)
+PASSED (TLS12-ECDHE-ECDSA-AES256-SHA384-server)
+PASSED (ECDHE-ECDSA-AES256-SHA-LargeRecord-DTLS)
+PASSED (TLS11-ECDHE-ECDSA-AES256-SHA-server)
+PASSED (ECDHE-ECDSA-AES256-SHA-LargeRecord)
+PASSED (ECDHE-ECDSA-AES256-SHA384-LargeRecord-DTLS)
+PASSED (DTLS12-ECDHE-ECDSA-AES256-SHA384-client)
+PASSED (TLS12-ECDHE-ECDSA-CHACHA20-POLY1305-server)
+PASSED (TLS12-ECDHE-ECDSA-AES256-SHA384-client)
+PASSED (ECDHE-ECDSA-AES256-SHA384-LargeRecord)
+FAILED (TLS12-ECDHE-ECDSA-CHACHA20-POLY1305-OLD-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47873634852288:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+PASSED (DTLS12-ECDHE-ECDSA-AES256-SHA384-server)
+FAILED (TLS12-ECDHE-ECDSA-CHACHA20-POLY1305-OLD-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47783402692032:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+PASSED (TLS12-ECDHE-ECDSA-CHACHA20-POLY1305-client)
+FAILED (TLS1-ECDHE-ECDSA-RC4-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47348025580992:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+PASSED (ECDHE-ECDSA-CHACHA20-POLY1305-LargeRecord)
+FAILED (DTLS12-ECDHE-ECDSA-CHACHA20-POLY1305-OLD-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47099068554688:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+PASSED (DTLS12-ECDHE-ECDSA-CHACHA20-POLY1305-client)
+FAILED (ECDHE-ECDSA-CHACHA20-POLY1305-OLD-LargeRecord)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47705669696960:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+PASSED (ECDHE-ECDSA-CHACHA20-POLY1305-LargeRecord-DTLS)
+PASSED (DTLS12-ECDHE-ECDSA-CHACHA20-POLY1305-server)
+PASSED (SSL3-ECDHE-ECDSA-RC4-SHA-server)
+FAILED (DTLS12-ECDHE-ECDSA-CHACHA20-POLY1305-OLD-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47070197460416:error:14102410:SSL routines:dtls1_read_bytes:reason(1040):ssl/record/rec_layer_d1.c:844:SSL alert number 40
+
+FAILED (TLS1-ECDHE-ECDSA-RC4-SHA-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47101371248064:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (ECDHE-ECDSA-CHACHA20-POLY1305-OLD-LargeRecord-DTLS)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47342411013568:error:14102410:SSL routines:dtls1_read_bytes:reason(1040):ssl/record/rec_layer_d1.c:844:SSL alert number 40
+
+FAILED (ECDHE-ECDSA-RC4-SHA-LargeRecord)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47121466580416:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (TLS11-ECDHE-ECDSA-RC4-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47646784294336:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+FAILED (TLS11-ECDHE-ECDSA-RC4-SHA-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47641467985344:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (TLS12-ECDHE-ECDSA-RC4-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47641963625920:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+FAILED (TLS12-ECDHE-ECDSA-RC4-SHA-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47853073497536:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+PASSED (SSL3-ECDHE-RSA-AES128-SHA-server)
+PASSED (TLS12-ECDHE-RSA-AES128-GCM-server)
+PASSED (DTLS12-ECDHE-RSA-AES128-GCM-client)
+PASSED (ECDHE-RSA-AES128-GCM-LargeRecord-DTLS)
+PASSED (DTLS12-ECDHE-RSA-AES128-GCM-server)
+PASSED (ECDHE-RSA-AES128-GCM-LargeRecord)
+PASSED (TLS12-ECDHE-RSA-AES128-GCM-client)
+PASSED (TLS1-ECDHE-RSA-AES128-SHA-server)
+PASSED (TLS1-ECDHE-RSA-AES128-SHA-client)
+PASSED (DTLS1-ECDHE-RSA-AES128-SHA-client)
+FAILED (DTLS1-ECDHE-RSA-AES128-SHA-server)
+unexpected failure: local error 'didResume is false, but we expected the opposite', child error 'exit status 1', stdout:
+
+stderr:
+session was not reused
+
+PASSED (TLS11-ECDHE-RSA-AES128-SHA-client)
+PASSED (TLS12-ECDHE-RSA-AES128-SHA-server)
+PASSED (TLS11-ECDHE-RSA-AES128-SHA-server)
+PASSED (TLS12-ECDHE-RSA-AES128-SHA256-server)
+PASSED (DTLS12-ECDHE-RSA-AES128-SHA-client)
+PASSED (ECDHE-RSA-AES128-SHA-LargeRecord-DTLS)
+PASSED (DTLS12-ECDHE-RSA-AES128-SHA-server)
+PASSED (TLS12-ECDHE-RSA-AES128-SHA256-client)
+PASSED (ECDHE-RSA-AES128-SHA-LargeRecord)
+PASSED (TLS12-ECDHE-RSA-AES128-SHA-client)
+PASSED (TLS12-ECDHE-RSA-AES256-GCM-server)
+PASSED (DTLS12-ECDHE-RSA-AES128-SHA256-client)
+PASSED (ECDHE-RSA-AES128-SHA256-LargeRecord)
+PASSED (DTLS12-ECDHE-RSA-AES128-SHA256-server)
+PASSED (ECDHE-RSA-AES128-SHA256-LargeRecord-DTLS)
+PASSED (TLS12-ECDHE-RSA-AES256-GCM-client)
+PASSED (DTLS12-ECDHE-RSA-AES256-GCM-server)
+PASSED (SSL3-ECDHE-RSA-AES256-SHA-server)
+PASSED (DTLS12-ECDHE-RSA-AES256-GCM-client)
+PASSED (ECDHE-RSA-AES256-GCM-LargeRecord)
+PASSED (ECDHE-RSA-AES256-GCM-LargeRecord-DTLS)
+PASSED (TLS1-ECDHE-RSA-AES256-SHA-server)
+PASSED (DTLS1-ECDHE-RSA-AES256-SHA-client)
+PASSED (TLS1-ECDHE-RSA-AES256-SHA-client)
+PASSED (TLS11-ECDHE-RSA-AES256-SHA-server)
+FAILED (DTLS1-ECDHE-RSA-AES256-SHA-server)
+unexpected failure: local error 'didResume is false, but we expected the opposite', child error 'exit status 1', stdout:
+
+stderr:
+session was not reused
+
+PASSED (TLS12-ECDHE-RSA-AES256-SHA-client)
+PASSED (TLS11-ECDHE-RSA-AES256-SHA-client)
+PASSED (TLS12-ECDHE-RSA-AES256-SHA-server)
+PASSED (ECDHE-RSA-AES256-SHA-LargeRecord)
+PASSED (DTLS12-ECDHE-RSA-AES256-SHA-server)
+PASSED (DTLS12-ECDHE-RSA-AES256-SHA-client)
+PASSED (ECDHE-RSA-AES256-SHA-LargeRecord-DTLS)
+PASSED (DTLS12-ECDHE-RSA-AES256-SHA384-server)
+PASSED (TLS12-ECDHE-RSA-AES256-SHA384-server)
+PASSED (TLS12-ECDHE-RSA-CHACHA20-POLY1305-client)
+PASSED (ECDHE-RSA-AES256-SHA384-LargeRecord)
+PASSED (TLS12-ECDHE-RSA-CHACHA20-POLY1305-server)
+PASSED (DTLS12-ECDHE-RSA-AES256-SHA384-client)
+FAILED (TLS12-ECDHE-RSA-CHACHA20-POLY1305-OLD-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+46931813690816:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+PASSED (DTLS12-ECDHE-RSA-CHACHA20-POLY1305-client)
+FAILED (DTLS12-ECDHE-RSA-CHACHA20-POLY1305-OLD-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47045651787200:error:14102410:SSL routines:dtls1_read_bytes:reason(1040):ssl/record/rec_layer_d1.c:844:SSL alert number 40
+
+PASSED (TLS12-ECDHE-RSA-AES256-SHA384-client)
+FAILED (TLS12-ECDHE-RSA-CHACHA20-POLY1305-OLD-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47070069386688:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (ECDHE-RSA-CHACHA20-POLY1305-OLD-LargeRecord)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47202026474944:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+PASSED (ECDHE-RSA-AES256-SHA384-LargeRecord-DTLS)
+FAILED (DTLS12-ECDHE-RSA-CHACHA20-POLY1305-OLD-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47314951142848:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+PASSED (SSL3-ECDHE-RSA-RC4-SHA-server)
+PASSED (DTLS12-ECDHE-RSA-CHACHA20-POLY1305-server)
+FAILED (ECDHE-RSA-CHACHA20-POLY1305-OLD-LargeRecord-DTLS)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47899845225920:error:14102410:SSL routines:dtls1_read_bytes:reason(1040):ssl/record/rec_layer_d1.c:844:SSL alert number 40
+
+FAILED (TLS1-ECDHE-RSA-RC4-SHA-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47272267619776:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (TLS11-ECDHE-RSA-RC4-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47145833549248:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+PASSED (ECDHE-RSA-CHACHA20-POLY1305-LargeRecord)
+FAILED (TLS11-ECDHE-RSA-RC4-SHA-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47560499961280:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+PASSED (ECDHE-RSA-CHACHA20-POLY1305-LargeRecord-DTLS)
+FAILED (TLS1-ECDHE-RSA-RC4-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47662858898880:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+FAILED (TLS12-ECDHE-RSA-RC4-SHA-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47148199456192:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (TLS12-ECDHE-RSA-RC4-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47971338112448:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+FAILED (ECDHE-RSA-RC4-SHA-LargeRecord)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47037436202432:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (SSL3-PSK-AES128-CBC-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47542687976896:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (SSL3-PSK-AES128-CBC-SHA-client)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47256420744640:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+PASSED (TLS1-PSK-AES128-CBC-SHA-server)
+PASSED (TLS11-PSK-AES128-CBC-SHA-client)
+PASSED (TLS12-PSK-AES128-CBC-SHA-server)
+PASSED (TLS11-PSK-AES128-CBC-SHA-server)
+FAILED (DTLS1-PSK-AES128-CBC-SHA-server)
+unexpected failure: local error 'didResume is false, but we expected the opposite', child error 'exit status 1', stdout:
+
+stderr:
+session was not reused
+
+PASSED (TLS1-PSK-AES128-CBC-SHA-client)
+PASSED (DTLS12-PSK-AES128-CBC-SHA-client)
+PASSED (DTLS1-PSK-AES128-CBC-SHA-client)
+PASSED (TLS12-PSK-AES128-CBC-SHA-client)
+FAILED (SSL3-PSK-AES256-CBC-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47733172678080:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (PSK-AES128-CBC-SHA-LargeRecord)
+PASSED (DTLS12-PSK-AES128-CBC-SHA-server)
+FAILED (SSL3-PSK-AES256-CBC-SHA-client)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+46959573732800:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+PASSED (PSK-AES128-CBC-SHA-LargeRecord-DTLS)
+PASSED (TLS11-PSK-AES256-CBC-SHA-client)
+PASSED (TLS1-PSK-AES256-CBC-SHA-client)
+FAILED (DTLS1-PSK-AES256-CBC-SHA-server)
+unexpected failure: local error 'didResume is false, but we expected the opposite', child error 'exit status 1', stdout:
+
+stderr:
+session was not reused
+
+PASSED (TLS1-PSK-AES256-CBC-SHA-server)
+PASSED (TLS12-PSK-AES256-CBC-SHA-server)
+PASSED (TLS11-PSK-AES256-CBC-SHA-server)
+PASSED (DTLS12-PSK-AES256-CBC-SHA-client)
+PASSED (DTLS1-PSK-AES256-CBC-SHA-client)
+PASSED (DTLS12-PSK-AES256-CBC-SHA-server)
+PASSED (SSL3-ECDHE-PSK-AES128-CBC-SHA-server)
+PASSED (PSK-AES256-CBC-SHA-LargeRecord-DTLS)
+PASSED (PSK-AES256-CBC-SHA-LargeRecord)
+PASSED (TLS12-PSK-AES256-CBC-SHA-client)
+PASSED (TLS1-ECDHE-PSK-AES128-CBC-SHA-server)
+FAILED (DTLS1-ECDHE-PSK-AES128-CBC-SHA-server)
+unexpected failure: local error 'didResume is false, but we expected the opposite', child error 'exit status 1', stdout:
+
+stderr:
+session was not reused
+
+PASSED (TLS1-ECDHE-PSK-AES128-CBC-SHA-client)
+PASSED (TLS11-ECDHE-PSK-AES128-CBC-SHA-server)
+PASSED (TLS12-ECDHE-PSK-AES128-CBC-SHA-server)
+PASSED (DTLS1-ECDHE-PSK-AES128-CBC-SHA-client)
+PASSED (TLS11-ECDHE-PSK-AES128-CBC-SHA-client)
+PASSED (SSL3-ECDHE-PSK-AES256-CBC-SHA-server)
+PASSED (DTLS12-ECDHE-PSK-AES128-CBC-SHA-client)
+PASSED (TLS12-ECDHE-PSK-AES128-CBC-SHA-client)
+PASSED (ECDHE-PSK-AES128-CBC-SHA-LargeRecord-DTLS)
+PASSED (ECDHE-PSK-AES128-CBC-SHA-LargeRecord)
+PASSED (DTLS12-ECDHE-PSK-AES128-CBC-SHA-server)
+PASSED (TLS1-ECDHE-PSK-AES256-CBC-SHA-server)
+PASSED (TLS1-ECDHE-PSK-AES256-CBC-SHA-client)
+PASSED (DTLS1-ECDHE-PSK-AES256-CBC-SHA-client)
+PASSED (TLS12-ECDHE-PSK-AES256-CBC-SHA-server)
+PASSED (TLS11-ECDHE-PSK-AES256-CBC-SHA-client)
+PASSED (ECDHE-PSK-AES256-CBC-SHA-LargeRecord)
+PASSED (TLS12-ECDHE-PSK-CHACHA20-POLY1305-client)
+PASSED (TLS12-ECDHE-PSK-AES256-CBC-SHA-client)
+PASSED (TLS11-ECDHE-PSK-AES256-CBC-SHA-server)
+PASSED (ECDHE-PSK-AES256-CBC-SHA-LargeRecord-DTLS)
+FAILED (DTLS1-ECDHE-PSK-AES256-CBC-SHA-server)
+unexpected failure: local error 'didResume is false, but we expected the opposite', child error 'exit status 1', stdout:
+
+stderr:
+session was not reused
+
+PASSED (DTLS12-ECDHE-PSK-AES256-CBC-SHA-server)
+PASSED (DTLS12-ECDHE-PSK-AES256-CBC-SHA-client)
+PASSED (TLS12-ECDHE-PSK-CHACHA20-POLY1305-server)
+PASSED (DTLS12-ECDHE-PSK-CHACHA20-POLY1305-client)
+FAILED (SSL3-PSK-RC4-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47325694184896:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (SSL3-PSK-RC4-SHA-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47459685363136:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (TLS1-PSK-RC4-SHA-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47807877393856:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (TLS11-PSK-RC4-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47788117163456:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+PASSED (DTLS12-ECDHE-PSK-CHACHA20-POLY1305-server)
+FAILED (TLS12-PSK-RC4-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47725487726016:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+FAILED (TLS11-PSK-RC4-SHA-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47451769224640:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+PASSED (ECDHE-PSK-CHACHA20-POLY1305-LargeRecord)
+FAILED (TLS1-PSK-RC4-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+46995391389120:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+FAILED (TLS12-PSK-RC4-SHA-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47856729218496:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+PASSED (ECDHE-PSK-CHACHA20-POLY1305-LargeRecord-DTLS)
+FAILED (PSK-RC4-SHA-LargeRecord)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47251628453312:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (TLS11-RC4-MD5-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47603670478272:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (SSL3-RC4-MD5-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47696366157248:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (SSL3-RC4-MD5-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47228308499904:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (TLS1-RC4-MD5-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47253029318080:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (TLS1-RC4-MD5-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47256312610240:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+FAILED (TLS12-RC4-MD5-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47364144106944:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+FAILED (TLS11-RC4-MD5-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47064061386176:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+FAILED (SSL3-RC4-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47402166586816:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (RC4-MD5-LargeRecord)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47874210713024:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (TLS12-RC4-MD5-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47423305350592:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (SSL3-RC4-SHA-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47284023721408:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (TLS1-RC4-SHA-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47333661167040:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (TLS1-RC4-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47225700515264:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+FAILED (TLS11-RC4-SHA-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47406422597056:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (RC4-SHA-LargeRecord)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47722684091840:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (TLS12-RC4-SHA-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47333151907264:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (SSL3-NULL-SHA-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47157618589120:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (TLS12-RC4-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47711874264512:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+FAILED (TLS11-RC4-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47368848235968:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+FAILED (SSL3-NULL-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47363813182912:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (TLS1-NULL-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47695719722432:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+FAILED (TLS11-NULL-SHA-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47221922385344:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (TLS12-NULL-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47172127464896:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+FAILED (TLS1-NULL-SHA-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47979126181312:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (TLS11-NULL-SHA-server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47396385906112:error:1417A0C1:SSL routines:tls_post_process_client_hello:no shared cipher:ssl/statem/statem_srvr.c:1481:
+
+FAILED (TLS12-NULL-SHA-client)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47055498272192:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (NULL-SHA-LargeRecord)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47945043590592:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (VersionSpecificCiphersTest-0-300)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47795285786048:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (DHPublicValuePadded)
+unexpected failure: local error 'RequireDHPublicValueLen set to 129, but server's public value was 128 bytes on the wire and 128 bytes if minimal', child error 'exit status 1', stdout:
+
+stderr:
+47668119670208:error:140943F2:SSL routines:ssl3_read_bytes:reason(1010):ssl/record/rec_layer_s3.c:1481:SSL alert number 10
+
+FAILED (VersionSpecificCiphersTest-0-302)
+unexpected failure: local error 'got cipher 2f, expected 5', child error 'none', stdout:
+
+stderr:
+
+PASSED (VersionSpecificCiphersTest-1-303)
+PASSED (VersionSpecificCiphersTest-1-300)
+PASSED (VersionSpecificCiphersTest-1-301)
+FAILED (VersionSpecificCiphersTest-0-301)
+unexpected failure: local error 'got cipher 2f, expected 5', child error 'none', stdout:
+
+stderr:
+
+PASSED (VersionSpecificCiphersTest-1-302)
+PASSED (VersionSpecificCiphersTest-2-301)
+PASSED (VersionSpecificCiphersTest-2-302)
+PASSED (VersionSpecificCiphersTest-2-303)
+FAILED (VersionSpecificCiphersTest-0-303)
+unexpected failure: local error 'got cipher 2f, expected 5', child error 'none', stdout:
+
+stderr:
+
+PASSED (VersionSpecificCiphersTest-3-301)
+PASSED (UnknownCipher)
+PASSED (VersionSpecificCiphersTest-3-300)
+PASSED (VersionSpecificCiphersTest-3-303)
+PASSED (VersionSpecificCiphersTest-2-300)
+PASSED (VersionSpecificCiphersTest-3-302)
+PASSED (WeakDH)
+PASSED (BadECDSA-2-1)
+PASSED (BadECDSA-2-2)
+PASSED (BadECDSA-1-4)
+PASSED (BadECDSA-2-3)
+PASSED (BadECDSA-1-1)
+PASSED (BadECDSA-1-3)
+PASSED (BadECDSA-1-2)
+PASSED (BadECDSA-2-4)
+PASSED (BadECDSA-3-1)
+PASSED (BadECDSA-3-2)
+PASSED (BadECDSA-3-3)
+PASSED (BadECDSA-4-3)
+PASSED (BadECDSA-4-1)
+PASSED (BadECDSA-3-4)
+PASSED (BadECDSA-4-2)
+PASSED (BadCBCPadding)
+PASSED (MaxCBCPadding)
+PASSED (BadECDSA-4-4)
+FAILED (SSL3-Server-ClientAuth-RSA)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47019951480256:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (TLS1-Client-ClientAuth-RSA)
+FAILED (SSL3-Client-ClientAuth-RSA)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47573385870784:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+PASSED (BadCBCPadding255)
+PASSED (TLS1-Server-ClientAuth-RSA)
+PASSED (TLS1-Server-ClientAuth-ECDSA)
+PASSED (TLS1-Client-ClientAuth-ECDSA)
+PASSED (TLS11-Client-ClientAuth-RSA)
+PASSED (TLS11-Server-ClientAuth-ECDSA)
+PASSED (RequireAnyClientCertificate-SSL3)
+PASSED (TLS12-Server-ClientAuth-ECDSA)
+PASSED (TLS11-Client-ClientAuth-ECDSA)
+PASSED (TLS12-Client-ClientAuth-RSA)
+PASSED (TLS11-Server-ClientAuth-RSA)
+PASSED (Server-DDoS-Reject-Resume)
+PASSED (SkipClientCertificate)
+PASSED (Server-DDoS-OK-NoResume)
+PASSED (Server-DDoS-OK-Resume)
+FAILED (VersionNegotiation-Client-SSL3-SSL3)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47432741535168:error:141640BF:SSL routines:tls_construct_client_hello:no protocols available:ssl/statem/statem_clnt.c:820:
+
+PASSED (Server-DDoS-Reject-NoResume)
+FAILED (VersionNegotiation-Client2-SSL3-TLS1)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+48000758922688:error:141640BF:SSL routines:tls_construct_client_hello:no protocols available:ssl/statem/statem_clnt.c:820:
+
+FAILED (VersionNegotiation-Server-SSL3-SSL3)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47531291372992:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (VersionNegotiation-Client2-SSL3-SSL3)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47210735640000:error:141640BF:SSL routines:tls_construct_client_hello:no protocols available:ssl/statem/statem_clnt.c:820:
+
+FAILED (VersionNegotiation-Server2-SSL3-SSL3)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47883985829312:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (TLS12-Server-ClientAuth-RSA)
+PASSED (TLS12-Client-ClientAuth-ECDSA)
+PASSED (RequireAnyClientCertificate)
+FAILED (VersionNegotiation-Server-SSL3-TLS1)
+unexpected failure: local error 'tls: received record with version 301 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47090807057856:error:1417D102:SSL routines:tls_process_client_hello:unsupported protocol:ssl/statem/statem_srvr.c:1053:
+
+FAILED (VersionNegotiation-Client-SSL3-TLS1)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47159327444416:error:141640BF:SSL routines:tls_construct_client_hello:no protocols available:ssl/statem/statem_clnt.c:820:
+
+FAILED (VersionNegotiation-Server2-SSL3-TLS1)
+unexpected failure: local error 'tls: received record with version 301 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47921639960000:error:1417D102:SSL routines:tls_process_client_hello:unsupported protocol:ssl/statem/statem_srvr.c:1053:
+
+FAILED (VersionNegotiation-Client-SSL3-TLS11)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+46953166597568:error:141640BF:SSL routines:tls_construct_client_hello:no protocols available:ssl/statem/statem_clnt.c:820:
+
+FAILED (VersionNegotiation-Client2-SSL3-TLS11)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47883925212608:error:141640BF:SSL routines:tls_construct_client_hello:no protocols available:ssl/statem/statem_clnt.c:820:
+
+FAILED (VersionNegotiation-Server2-SSL3-TLS11)
+unexpected failure: local error 'tls: received record with version 302 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47235617684928:error:1417D102:SSL routines:tls_process_client_hello:unsupported protocol:ssl/statem/statem_srvr.c:1053:
+
+FAILED (VersionNegotiation-Client-SSL3-TLS12)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47186566307264:error:141640BF:SSL routines:tls_construct_client_hello:no protocols available:ssl/statem/statem_clnt.c:820:
+
+FAILED (VersionNegotiation-Client2-SSL3-TLS12)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47529457450432:error:141640BF:SSL routines:tls_construct_client_hello:no protocols available:ssl/statem/statem_clnt.c:820:
+
+FAILED (VersionNegotiation-Server-SSL3-TLS11)
+unexpected failure: local error 'tls: received record with version 302 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47507656969664:error:1417D102:SSL routines:tls_process_client_hello:unsupported protocol:ssl/statem/statem_srvr.c:1053:
+
+FAILED (VersionNegotiation-Server-SSL3-TLS12)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47754033438144:error:1417D102:SSL routines:tls_process_client_hello:unsupported protocol:ssl/statem/statem_srvr.c:1053:
+
+FAILED (VersionNegotiation-Client2-TLS1-SSL3)
+unexpected failure: local error 'tls: received record with version 301 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47877614464448:error:1417110A:SSL routines:tls_process_server_hello:wrong ssl version:ssl/statem/statem_clnt.c:1044:
+
+FAILED (VersionNegotiation-Server-TLS1-SSL3)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+48011081768384:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (VersionNegotiation-Client-TLS1-SSL3)
+unexpected failure: local error 'tls: received record with version 301 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47035517922752:error:1417110A:SSL routines:tls_process_server_hello:wrong ssl version:ssl/statem/statem_clnt.c:1044:
+
+FAILED (VersionNegotiation-Server2-SSL3-TLS12)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47765479419328:error:1417D102:SSL routines:tls_process_client_hello:unsupported protocol:ssl/statem/statem_srvr.c:1053:
+
+FAILED (VersionNegotiation-Server2-TLS1-SSL3)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47533578681792:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (VersionNegotiation-Server-TLS1-TLS1)
+PASSED (VersionNegotiation-Client-TLS1-TLS1)
+PASSED (VersionNegotiation-Client2-TLS1-TLS1-DTLS)
+PASSED (VersionNegotiation-Client-TLS1-TLS1-DTLS)
+PASSED (VersionNegotiation-Server2-TLS1-TLS1)
+PASSED (VersionNegotiation-Client2-TLS1-TLS1)
+PASSED (VersionNegotiation-Server2-TLS1-TLS1-DTLS)
+PASSED (VersionNegotiation-Server-TLS1-TLS1-DTLS)
+PASSED (VersionNegotiation-Client-TLS1-TLS11)
+PASSED (VersionNegotiation-Client2-TLS1-TLS12)
+PASSED (VersionNegotiation-Client-TLS1-TLS12)
+PASSED (VersionNegotiation-Client2-TLS1-TLS11)
+PASSED (VersionNegotiation-Server-TLS1-TLS11)
+PASSED (VersionNegotiation-Server2-TLS1-TLS11)
+PASSED (VersionNegotiation-Server2-TLS1-TLS12)
+PASSED (VersionNegotiation-Server-TLS1-TLS12-DTLS)
+PASSED (VersionNegotiation-Server-TLS1-TLS12)
+FAILED (VersionNegotiation-Client-TLS11-SSL3)
+unexpected failure: local error 'tls: client included signature_algorithms before TLS 1.2', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (VersionNegotiation-Client2-TLS11-SSL3)
+unexpected failure: local error 'tls: client included signature_algorithms before TLS 1.2', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (VersionNegotiation-Client-TLS1-TLS12-DTLS)
+FAILED (VersionNegotiation-Client-TLS11-TLS1)
+unexpected failure: local error 'tls: client included signature_algorithms before TLS 1.2', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (VersionNegotiation-Client2-TLS11-TLS1)
+unexpected failure: local error 'tls: client included signature_algorithms before TLS 1.2', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (VersionNegotiation-Client2-TLS1-TLS12-DTLS)
+FAILED (VersionNegotiation-Server-TLS11-SSL3)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47967675706816:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (VersionNegotiation-Server2-TLS1-TLS12-DTLS)
+FAILED (VersionNegotiation-Server2-TLS11-SSL3)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+46998801849792:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (VersionNegotiation-Client-TLS11-TLS11)
+unexpected failure: local error 'tls: client included signature_algorithms before TLS 1.2', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (VersionNegotiation-Client2-TLS11-TLS11)
+unexpected failure: local error 'tls: client included signature_algorithms before TLS 1.2', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (VersionNegotiation-Server2-TLS11-TLS1)
+FAILED (VersionNegotiation-Client-TLS11-TLS12)
+unexpected failure: local error 'tls: client included signature_algorithms before TLS 1.2', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (VersionNegotiation-Server-TLS11-TLS1)
+FAILED (VersionNegotiation-Client2-TLS11-TLS12)
+unexpected failure: local error 'tls: client included signature_algorithms before TLS 1.2', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (VersionNegotiation-Server2-TLS11-TLS11)
+PASSED (VersionNegotiation-Server-TLS11-TLS11)
+FAILED (VersionNegotiation-Server2-TLS12-SSL3)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47758654217664:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (VersionNegotiation-Server-TLS11-TLS12)
+PASSED (VersionNegotiation-Server2-TLS11-TLS12)
+FAILED (VersionNegotiation-Client-TLS12-SSL3)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47133351759296:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+FAILED (VersionNegotiation-Server-TLS12-SSL3)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47841688681920:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (VersionNegotiation-Client2-TLS12-SSL3)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47412426214848:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+PASSED (VersionNegotiation-Server-TLS12-TLS1)
+PASSED (VersionNegotiation-Client-TLS12-TLS1-DTLS)
+PASSED (VersionNegotiation-Client-TLS12-TLS11)
+PASSED (VersionNegotiation-Server2-TLS12-TLS1-DTLS)
+PASSED (VersionNegotiation-Server2-TLS12-TLS1)
+PASSED (VersionNegotiation-Client-TLS12-TLS1)
+PASSED (VersionNegotiation-Server-TLS12-TLS1-DTLS)
+PASSED (VersionNegotiation-Client2-TLS12-TLS1)
+PASSED (VersionNegotiation-Client-TLS12-TLS12)
+PASSED (VersionNegotiation-Server2-TLS12-TLS11)
+PASSED (VersionNegotiation-Client2-TLS12-TLS11)
+PASSED (VersionNegotiation-Client2-TLS12-TLS1-DTLS)
+PASSED (VersionNegotiation-Server-TLS12-TLS11)
+PASSED (VersionNegotiation-Server-TLS12-TLS12)
+PASSED (VersionNegotiation-Client-TLS12-TLS12-DTLS)
+PASSED (VersionNegotiation-Client2-TLS12-TLS12)
+FAILED (MinimumVersion-Client2-SSL3-SSL3)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+46919582891456:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+PASSED (VersionNegotiation-Server2-TLS12-TLS12-DTLS)
+PASSED (VersionNegotiation-Server-TLS12-TLS12-DTLS)
+FAILED (MinimumVersion-Client-SSL3-SSL3)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47030905458112:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+FAILED (MinimumVersion-Server-SSL3-SSL3)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47132207459776:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (VersionNegotiation-Server2-TLS12-TLS12)
+PASSED (VersionNegotiation-Client2-TLS12-TLS12-DTLS)
+FAILED (MinimumVersion-Server2-SSL3-SSL3)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47374582865344:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (MinimumVersion-Client-SSL3-TLS1)
+PASSED (MinimumVersion-Client2-SSL3-TLS1)
+PASSED (MinimumVersion-Client-SSL3-TLS11)
+PASSED (MinimumVersion-Server2-SSL3-TLS1)
+PASSED (MinimumVersion-Server-SSL3-TLS11)
+PASSED (MinimumVersion-Server2-SSL3-TLS11)
+PASSED (MinimumVersion-Server-SSL3-TLS12)
+PASSED (MinimumVersion-Server2-SSL3-TLS12)
+PASSED (MinimumVersion-Client2-SSL3-TLS12)
+PASSED (MinimumVersion-Client2-SSL3-TLS11)
+PASSED (MinimumVersion-Server-SSL3-TLS1)
+PASSED (MinimumVersion-Client-SSL3-TLS12)
+FAILED (MinimumVersion-Client-TLS1-SSL3)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47158206922176:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+FAILED (MinimumVersion-Server-TLS1-SSL3)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47985025961408:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (MinimumVersion-Client2-TLS1-SSL3)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47534913875392:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+PASSED (MinimumVersion-Client2-TLS1-TLS1)
+PASSED (MinimumVersion-Server2-TLS1-TLS1)
+FAILED (MinimumVersion-Server2-TLS1-SSL3)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47269789289920:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (MinimumVersion-Client-TLS1-TLS1)
+PASSED (MinimumVersion-Server-TLS1-TLS1)
+PASSED (MinimumVersion-Client-TLS1-TLS1-DTLS)
+PASSED (MinimumVersion-Server2-TLS1-TLS1-DTLS)
+PASSED (MinimumVersion-Server-TLS1-TLS11)
+PASSED (MinimumVersion-Client2-TLS1-TLS11)
+PASSED (MinimumVersion-Client2-TLS1-TLS1-DTLS)
+PASSED (MinimumVersion-Client-TLS1-TLS11)
+PASSED (MinimumVersion-Server-TLS1-TLS1-DTLS)
+PASSED (MinimumVersion-Server2-TLS1-TLS12)
+PASSED (MinimumVersion-Server-TLS1-TLS12-DTLS)
+PASSED (MinimumVersion-Client-TLS1-TLS12)
+PASSED (MinimumVersion-Server2-TLS1-TLS11)
+PASSED (MinimumVersion-Client-TLS1-TLS12-DTLS)
+PASSED (MinimumVersion-Server-TLS1-TLS12)
+PASSED (MinimumVersion-Server2-TLS1-TLS12-DTLS)
+FAILED (MinimumVersion-Server-TLS11-SSL3)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47465978088896:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (MinimumVersion-Client2-TLS11-SSL3)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47661794098624:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+PASSED (MinimumVersion-Client2-TLS1-TLS12)
+FAILED (MinimumVersion-Server2-TLS11-SSL3)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47787215232448:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (MinimumVersion-Client-TLS11-SSL3)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47499145764288:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+FAILED (MinimumVersion-Client-TLS11-TLS1)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'tls: received record with version 303 when expecting version 301', child error 'exit status 1', stdout:
+
+stderr:
+47956817092032:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+PASSED (MinimumVersion-Server-TLS11-TLS1)
+FAILED (MinimumVersion-Client2-TLS11-TLS1)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'tls: received record with version 303 when expecting version 301', child error 'exit status 1', stdout:
+
+stderr:
+47473769582016:error:1417118C:SSL routines:tls_process_server_hello:version too low:ssl/statem/statem_clnt.c:1044:
+
+PASSED (MinimumVersion-Server2-TLS11-TLS1)
+PASSED (MinimumVersion-Client-TLS11-TLS11)
+PASSED (MinimumVersion-Client2-TLS1-TLS12-DTLS)
+PASSED (MinimumVersion-Client2-TLS11-TLS11)
+PASSED (MinimumVersion-Server-TLS11-TLS11)
+PASSED (MinimumVersion-Server2-TLS11-TLS11)
+FAILED (MinimumVersion-Server-TLS12-SSL3)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+46928251731392:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (MinimumVersion-Server2-TLS11-TLS12)
+PASSED (MinimumVersion-Client-TLS11-TLS12)
+PASSED (MinimumVersion-Server-TLS11-TLS12)
+FAILED (MinimumVersion-Server2-TLS12-SSL3)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+46985924214208:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (MinimumVersion-Client2-TLS11-TLS12)
+FAILED (MinimumVersion-Client-TLS12-SSL3)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47313905880512:error:1417110A:SSL routines:tls_process_server_hello:wrong ssl version:ssl/statem/statem_clnt.c:1044:
+
+FAILED (MinimumVersion-Client-TLS12-TLS1)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'tls: received record with version 303 when expecting version 301', child error 'exit status 1', stdout:
+
+stderr:
+47762047466944:error:1417110A:SSL routines:tls_process_server_hello:wrong ssl version:ssl/statem/statem_clnt.c:1044:
+
+FAILED (MinimumVersion-Client2-TLS12-SSL3)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47209234763200:error:1417110A:SSL routines:tls_process_server_hello:wrong ssl version:ssl/statem/statem_clnt.c:1044:
+
+FAILED (MinimumVersion-Client-TLS12-TLS1-DTLS)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'dtls: received record with version 303 when expecting version 301', child error 'exit status 1', stdout:
+
+stderr:
+47752339008960:error:1417110A:SSL routines:tls_process_server_hello:wrong ssl version:ssl/statem/statem_clnt.c:1044:
+
+PASSED (MinimumVersion-Server2-TLS12-TLS1)
+PASSED (MinimumVersion-Server-TLS12-TLS1)
+FAILED (MinimumVersion-Client2-TLS12-TLS1-DTLS)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'dtls: received record with version 303 when expecting version 301', child error 'exit status 1', stdout:
+
+stderr:
+47872844344768:error:1417110A:SSL routines:tls_process_server_hello:wrong ssl version:ssl/statem/statem_clnt.c:1044:
+
+FAILED (MinimumVersion-Client2-TLS12-TLS1)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'tls: received record with version 303 when expecting version 301', child error 'exit status 1', stdout:
+
+stderr:
+47355876502976:error:1417110A:SSL routines:tls_process_server_hello:wrong ssl version:ssl/statem/statem_clnt.c:1044:
+
+PASSED (MinimumVersion-Server2-TLS12-TLS1-DTLS)
+PASSED (MinimumVersion-Server-TLS12-TLS1-DTLS)
+PASSED (CBCRecordSplittingPartialWrite)
+FAILED (MinimumVersion-Client2-TLS12-TLS11)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'tls: received record with version 303 when expecting version 302', child error 'exit status 1', stdout:
+
+stderr:
+47142280420800:error:1417110A:SSL routines:tls_process_server_hello:wrong ssl version:ssl/statem/statem_clnt.c:1044:
+
+FAILED (MinimumVersion-Client-TLS12-TLS11)
+bad error (wanted ':UNSUPPORTED_PROTOCOL:' / 'remote error: protocol version not supported'): local error 'tls: received record with version 303 when expecting version 302', child error 'exit status 1', stdout:
+
+stderr:
+47431805099456:error:1417110A:SSL routines:tls_process_server_hello:wrong ssl version:ssl/statem/statem_clnt.c:1044:
+
+PASSED (MinimumVersion-Server-TLS12-TLS11)
+PASSED (MinimumVersion-Server-TLS12-TLS12)
+PASSED (MinimumVersion-Client-TLS12-TLS12)
+PASSED (MinimumVersion-Client2-TLS12-TLS12)
+PASSED (MinimumVersion-Server2-TLS12-TLS12)
+PASSED (MinimumVersion-Server2-TLS12-TLS12-DTLS)
+PASSED (MinimumVersion-Server2-TLS12-TLS11)
+PASSED (DuplicateExtensionServer)
+PASSED (ServerNameExtensionClientMismatch)
+PASSED (MinimumVersion-Client-TLS12-TLS12-DTLS)
+PASSED (MinimumVersion-Server-TLS12-TLS12-DTLS)
+PASSED (DuplicateExtensionClient)
+PASSED (ServerNameExtensionClient)
+PASSED (ServerNameExtensionClientMissing)
+PASSED (ALPNServer-EmptyProtocolName)
+PASSED (MinimumVersion-Client2-TLS12-TLS12-DTLS)
+PASSED (ALPNClient-EmptyProtocolName)
+FAILED (NegotiateALPNAndNPN)
+unexpected success: local error 'none', child error 'none', stdout:
+
+stderr:
+
+PASSED (ALPNClient)
+PASSED (ServerNameExtensionServer)
+PASSED (DisableNPN)
+PASSED (ALPNServer)
+FAILED (NegotiateALPNAndNPN-Swapped)
+unexpected success: local error 'none', child error 'none', stdout:
+
+stderr:
+
+PASSED (ALPNServer-Preferred)
+FAILED (ALPNServer-Preferred-Swapped)
+unexpected failure: local error 'server advertised both NPN and ALPN extensions', child error 'exit status 1', stdout:
+
+stderr:
+48010403958208:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+PASSED (SRTP-Server-IgnoreMKI)
+PASSED (SRTP-Client-NoMatch)
+PASSED (SRTP-Server)
+PASSED (SRTP-Client)
+PASSED (TicketCallback-Renew)
+PASSED (SignedCertificateTimestampList-Client)
+PASSED (OversizedSessionId)
+PASSED (CorruptTicket)
+PASSED (SignedCertificateTimestampList-Server)
+PASSED (TicketCallback)
+FAILED (SSLv3Extensions-NoTickets2)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47314221264320:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (SSLv3Extensions-RenegotiationInfo)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47644888378816:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (SSLv3Extensions-RenegotiationInfo-SCSV)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+46923052035520:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (SSLv3Extensions-NoALPN)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47514124287424:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (SRTP-Server-NoMatch)
+FAILED (ClientHelloPadding)
+unexpected failure: local error 'tls: ClientHello record size is 350, but expected 512', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Resume-Client-SSL3-SSL3)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47773614325184:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+FAILED (Resume-Client-NoResume-SSL3-SSL3)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+46956584385984:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+PASSED (Resume-Client-Mismatch-SSL3-TLS11)
+FAILED (SSLv3Extensions-NoTickets)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+46945186717120:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (Resume-Client-Mismatch-SSL3-TLS1)
+FAILED (Resume-Client-NoResume-SSL3-TLS1)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47065082052032:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+FAILED (Resume-Server-SSL3-SSL3)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47376096325056:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (Resume-Server-SSL3-TLS11)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+46920455855552:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (Resume-Client-NoResume-SSL3-TLS11)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47412773989824:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+PASSED (Resume-Client-Mismatch-SSL3-TLS12)
+FAILED (Resume-Server-SSL3-TLS1)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47993066196416:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (Resume-Client-NoResume-SSL3-TLS12)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+46971905564096:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+FAILED (Resume-Server-SSL3-TLS12)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47758937972160:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (Resume-Client-NoResume-TLS1-SSL3)
+unexpected failure: local error 'tls: received record with version 301 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47552687005120:error:1417110A:SSL routines:tls_process_server_hello:wrong ssl version:ssl/statem/statem_clnt.c:1044:
+
+PASSED (Resume-Client-Mismatch-TLS1-SSL3)
+PASSED (Resume-Client-TLS1-TLS1)
+FAILED (Resume-Server-TLS1-SSL3)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47096983514560:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (Resume-Client-TLS1-TLS1-DTLS)
+PASSED (Resume-Client-NoResume-TLS1-TLS1-DTLS)
+PASSED (Resume-Client-NoResume-TLS1-TLS1)
+PASSED (Resume-Server-TLS1-TLS1)
+FAILED (Resume-Server-TLS1-TLS1-DTLS)
+unexpected failure: local error 'didResume is false, but we expected the opposite', child error 'exit status 1', stdout:
+
+stderr:
+session was not reused
+
+FAILED (Resume-Client-Mismatch-TLS1-TLS11)
+bad error (wanted ':OLD_SESSION_VERSION_NOT_RETURNED:' / ''): local error 'got version 301, expected 302', child error 'none', stdout:
+
+stderr:
+
+PASSED (Resume-Server-TLS1-TLS11)
+FAILED (Resume-Client-Mismatch-TLS1-TLS12)
+bad error (wanted ':OLD_SESSION_VERSION_NOT_RETURNED:' / ''): local error 'got version 301, expected 303', child error 'none', stdout:
+
+stderr:
+
+FAILED (Resume-Client-Mismatch-TLS1-TLS12-DTLS)
+bad error (wanted ':OLD_SESSION_VERSION_NOT_RETURNED:' / ''): local error 'got version 301, expected 303', child error 'none', stdout:
+
+stderr:
+
+FAILED (Resume-Client-NoResume-TLS1-TLS11)
+unexpected failure: local error 'got version 301, expected 302', child error 'none', stdout:
+
+stderr:
+
+FAILED (Resume-Client-NoResume-TLS1-TLS12)
+unexpected failure: local error 'got version 301, expected 303', child error 'none', stdout:
+
+stderr:
+
+FAILED (SillyDH)
+unexpected success: local error 'none', child error 'none', stdout:
+
+stderr:
+
+PASSED (Resume-Server-TLS1-TLS12)
+PASSED (Resume-Client-Mismatch-TLS11-SSL3)
+FAILED (Resume-Client-NoResume-TLS1-TLS12-DTLS)
+unexpected failure: local error 'got version 301, expected 303', child error 'none', stdout:
+
+stderr:
+
+PASSED (Resume-Client-TLS11-TLS11)
+PASSED (Resume-Server-TLS1-TLS12-DTLS)
+FAILED (Resume-Client-NoResume-TLS11-TLS1)
+unexpected failure: local error 'tls: received record with version 302 when expecting version 301', child error 'exit status 1', stdout:
+
+stderr:
+47367304965568:error:1417110A:SSL routines:tls_process_server_hello:wrong ssl version:ssl/statem/statem_clnt.c:1044:
+
+PASSED (Resume-Client-Mismatch-TLS11-TLS1)
+PASSED (Resume-Server-TLS11-TLS1)
+PASSED (Resume-Server-TLS11-TLS11)
+FAILED (Resume-Server-TLS11-SSL3)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47530770714048:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (Resume-Client-NoResume-TLS11-SSL3)
+unexpected failure: local error 'tls: received record with version 302 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47974513012160:error:1417110A:SSL routines:tls_process_server_hello:wrong ssl version:ssl/statem/statem_clnt.c:1044:
+
+FAILED (Resume-Server-TLS12-SSL3)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47792601836992:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (Resume-Client-Mismatch-TLS12-SSL3)
+PASSED (Resume-Client-Mismatch-TLS12-TLS1)
+FAILED (Resume-Client-NoResume-TLS11-TLS12)
+unexpected failure: local error 'got version 302, expected 303', child error 'none', stdout:
+
+stderr:
+
+FAILED (Resume-Client-NoResume-TLS12-SSL3)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47458891668928:error:1417110A:SSL routines:tls_process_server_hello:wrong ssl version:ssl/statem/statem_clnt.c:1044:
+
+FAILED (Resume-Client-Mismatch-TLS11-TLS12)
+bad error (wanted ':OLD_SESSION_VERSION_NOT_RETURNED:' / ''): local error 'got version 302, expected 303', child error 'none', stdout:
+
+stderr:
+
+PASSED (Resume-Client-NoResume-TLS11-TLS11)
+PASSED (Resume-Server-TLS11-TLS12)
+PASSED (Resume-Server-TLS12-TLS1)
+PASSED (CBCRecordSplitting)
+FAILED (Resume-Client-NoResume-TLS12-TLS1)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 301', child error 'exit status 1', stdout:
+
+stderr:
+47879291604416:error:1417110A:SSL routines:tls_process_server_hello:wrong ssl version:ssl/statem/statem_clnt.c:1044:
+
+FAILED (Resume-Client-NoResume-TLS12-TLS1-DTLS)
+unexpected failure: local error 'dtls: received record with version 303 when expecting version 301', child error 'exit status 1', stdout:
+
+stderr:
+47083181690304:error:1417110A:SSL routines:tls_process_server_hello:wrong ssl version:ssl/statem/statem_clnt.c:1044:
+
+PASSED (Resume-Client-Mismatch-TLS12-TLS1-DTLS)
+PASSED (Resume-Server-TLS12-TLS1-DTLS)
+PASSED (Resume-Client-Mismatch-TLS12-TLS11)
+FAILED (Resume-Client-NoResume-TLS12-TLS11)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 302', child error 'exit status 1', stdout:
+
+stderr:
+47917670452672:error:1417110A:SSL routines:tls_process_server_hello:wrong ssl version:ssl/statem/statem_clnt.c:1044:
+
+PASSED (Resume-Server-TLS12-TLS11)
+FAILED (NoExtendedMasterSecret-SSL3-Server)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47754208161216:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (Resume-Server-TLS12-TLS12)
+PASSED (Resume-Client-TLS12-TLS12)
+PASSED (NoExtendedMasterSecret-TLS11-Server)
+PASSED (Resume-Client-CipherMismatch)
+PASSED (Resume-Client-TLS12-TLS12-DTLS)
+PASSED (Resume-Server-TLS12-TLS12-DTLS)
+PASSED (NoExtendedMasterSecret-TLS1-Server)
+PASSED (Resume-Client-NoResume-TLS12-TLS12)
+PASSED (NoExtendedMasterSecret-TLS12-Server)
+FAILED (NoExtendedMasterSecret-SSL3-Client)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47906098884032:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+PASSED (Resume-Client-NoResume-TLS12-TLS12-DTLS)
+PASSED (NoExtendedMasterSecret-TLS12-Client)
+FAILED (ExtendedMasterSecret-SSL3-Server)
+bad error (wanted '' / 'extended master secret required but not supported by peer'): local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47165662326208:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (NoExtendedMasterSecret-TLS11-Client)
+PASSED (ExtendedMasterSecret-TLS1-Server)
+PASSED (ExtendedMasterSecret-TLS11-Server)
+FAILED (ExtendedMasterSecret-SSL3-Client)
+bad error (wanted '' / 'extended master secret required but not supported by peer'): local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47603030269376:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+PASSED (ExtendedMasterSecret-TLS12-Server)
+PASSED (NoExtendedMasterSecret-TLS1-Client)
+PASSED (ExtendedMasterSecret-TLS1-Client)
+PASSED (ExtendedMasterSecret-YesToNo-Server)
+PASSED (ExtendedMasterSecret-TLS11-Client)
+PASSED (ExtendedMasterSecret-TLS12-Client)
+PASSED (ExtendedMasterSecret-NoToNo-Server)
+PASSED (ExtendedMasterSecret-YesToYes-Server)
+PASSED (ExtendedMasterSecret-NoToYes-Server)
+PASSED (ExtendedMasterSecret-NoToNo-Client)
+PASSED (ExtendedMasterSecret-NoToYes-Client)
+PASSED (ExtendedMasterSecret-YesToNo-Client)
+PASSED (Renegotiate-Server-NoExt)
+FAILED (Renegotiate-Client-SwitchCiphers)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47775679811008:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+PASSED (Renegotiate-Server-NoExt-SCSV)
+PASSED (Renegotiate-Client-EmptyExt)
+FAILED (Renegotiate-Server-Forbidden)
+bad error (wanted ':NO_RENEGOTIATION:' / 'remote error: no renegotiation'): local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (Renegotiate-Client-BadExt)
+FAILED (Renegotiate-Client)
+unexpected failure: local error 'tls: offered resumption on renegotiation', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (ExtendedMasterSecret-YesToYes-Client)
+FAILED (Renegotiate-Client-Upgrade)
+bad error (wanted ':RENEGOTIATION_MISMATCH:' / ''): local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (Renegotiate-Client-Once-1)
+PASSED (Renegotiate-FalseStart)
+PASSED (Renegotiate-Client-Once-2)
+FAILED (Renegotiate-Client-Downgrade)
+bad error (wanted ':RENEGOTIATION_MISMATCH:' / ''): local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Renegotiate-Client-NoExt-Allowed)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (Renegotiate-Client-Ignore)
+FAILED (Renegotiate-Client-SwitchCiphers2)
+unexpected failure: local error 'tls: no cipher suite supported by both client and server', child error 'exit status 1', stdout:
+
+stderr:
+47105816653248:error:14094410:SSL routines:ssl3_read_bytes:reason(1040):ssl/record/rec_layer_s3.c:1481:SSL alert number 40
+
+FAILED (Renegotiate-SameClientVersion)
+unexpected failure: local error 'tls: client offered different version on renego', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Renegotiate-Client-Freely-1)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (SigningHash-ClientAuth-SHA1)
+FAILED (Renegotiate-Client-Forbidden-1)
+bad error (wanted ':NO_RENEGOTIATION:' / 'remote error: no renegotiation'): local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (Renegotiate-Client-NoIgnore)
+PASSED (SigningHash-ServerKeyExchange-Sign-SHA1)
+FAILED (Renegotiate-Client-Freely-2)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (SigningHash-ServerKeyExchange-Verify-SHA1)
+PASSED (SigningHash-ClientAuth-SHA256)
+PASSED (SigningHash-ServerKeyExchange-Verify-SHA256)
+PASSED (SigningHash-ServerKeyExchange-Sign-SHA256)
+PASSED (SigningHash-ClientAuth-SHA384)
+PASSED (SigningHash-ServerKeyExchange-Sign-SHA384)
+PASSED (SigningHash-ServerKeyExchange-Sign-SHA512)
+PASSED (SigningHash-ClientAuth-SHA512)
+PASSED (SigningHash-ServerKeyExchange-Verify-SHA384)
+PASSED (SigningHash-ServerKeyExchange-SignatureType)
+FAILED (SigningHash-ClientAuth-Fallback)
+unexpected failure: local error 'remote error: error decoding message', child error 'exit status 1', stdout:
+
+stderr:
+47463618076096:error:14169168:SSL routines:tls_process_certificate_request:signature algorithms error:ssl/statem/statem_clnt.c:1813:
+
+PASSED (Agree-Digest-Fallback)
+PASSED (SigningHash-ClientAuth-SignatureType)
+PASSED (SigningHash-ServerKeyExchange-Verify-SHA512)
+PASSED (SigningHash-ServerKeyExchange-Fallback)
+PASSED (Agree-Digest-SHA256)
+PASSED (SigningHash-ServerKeyExchange-Enforced)
+PASSED (SigningHash-ClientAuth-Enforced)
+PASSED (Agree-Digest-SHA1)
+PASSED (DTLS-Retransmit-Server-2)
+FAILED (DTLS-Retransmit-Client-1)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (DTLS-Retransmit-Client-3)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (DTLS-Retransmit-Client-2)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (DTLS-Retransmit-Server-3)
+FAILED (DTLS-Retransmit-Client-4)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (DTLS-Retransmit-Server-1)
+FAILED (DTLS-Retransmit-Client-5)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (DTLS-Retransmit-Client-7)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (DTLS-Retransmit-Server-6)
+FAILED (DTLS-Retransmit-Client-6)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (Agree-Digest-Default)
+PASSED (DTLS-Retransmit-Server-4)
+PASSED (DTLS-Retransmit-Server-7)
+PASSED (DTLS-Retransmit-Server-5)
+FAILED (DTLS-Retransmit-Client-8)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (DTLS-Retransmit-Client-9)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (DTLS-Retransmit-Client-10)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (DTLS-Retransmit-Server-9)
+PASSED (DTLS-Retransmit-Server-8)
+PASSED (DTLS-Replay-NonMonotonic)
+FAILED (DTLS-Retransmit-Client-11)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (DTLS-Retransmit-Server-12)
+FAILED (DTLS-Retransmit-Client-12)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (DTLS-Replay-LargeGaps)
+FAILED (DTLS-Retransmit-Timeout)
+bad error (wanted ':READ_TIMEOUT_EXPIRED:' / ''): local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (DTLS-Retransmit-Server-10)
+PASSED (DTLS-Retransmit-Server-11)
+FAILED (DTLS-Retransmit-Fudge)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (DTLS-Replay)
+PASSED (ExportKeyingMaterial-NoContext-TLS1)
+PASSED (DTLS-Retransmit-Fragmented)
+PASSED (ExportKeyingMaterial-TLS11)
+PASSED (ExportKeyingMaterial-TLS1)
+PASSED (ExportKeyingMaterial-TLS12)
+PASSED (ExportKeyingMaterial-EmptyContext-TLS1)
+PASSED (ExportKeyingMaterial-Small-TLS1)
+PASSED (ExportKeyingMaterial-Small-TLS11)
+PASSED (ExportKeyingMaterial-NoContext-TLS11)
+PASSED (ExportKeyingMaterial-NoContext-TLS12)
+PASSED (ExportKeyingMaterial-EmptyContext-TLS12)
+FAILED (ExportKeyingMaterial-SSL3)
+bad error (wanted 'failed to export keying material' / ''): local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47154215644608:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+PASSED (ExportKeyingMaterial-EmptyContext-TLS11)
+PASSED (CustomExtensions-ParseError-Server)
+PASSED (TLSUnique-Full-NoEMS-Server)
+PASSED (TLSUnique-Full-EMS-Server)
+PASSED (ExportKeyingMaterial-Small-TLS12)
+PASSED (TLSUnique-Resume-EMS-Server)
+PASSED (CustomExtensions-Server)
+PASSED (TLSUnique-Resume-NoEMS-Server)
+PASSED (TLSUnique-Resume-NoEMS-Client)
+PASSED (TLSUnique-Full-NoEMS-Client)
+PASSED (TLSUnique-Full-EMS-Client)
+PASSED (CustomExtensions-FailAdd-Server)
+PASSED (BadRSAClientKeyExchange-3)
+PASSED (CustomExtensions-FailAdd-Client)
+PASSED (BadRSAClientKeyExchange-1)
+PASSED (CustomExtensions-NotCalled-Server)
+PASSED (CustomExtensions-Skip-Server)
+PASSED (CustomExtensions-Client)
+PASSED (BadRSAClientKeyExchange-2)
+PASSED (CustomExtensions-Skip-Client)
+FAILED (UnknownExtension-Client)
+unexpected success: local error 'none', child error 'none', stdout:
+
+stderr:
+
+PASSED (CustomExtensions-ParseError-Client)
+PASSED (TLSUnique-Resume-EMS-Client)
+PASSED (BadRSAClientKeyExchange-4)
+PASSED (CurveTest-Server-P-256)
+PASSED (KeyExchangeInfo-RSA-Client)
+PASSED (CurveTest-Client-P-256)
+PASSED (CurveTest-Server-X25519)
+PASSED (UnknownCurve)
+PASSED (CurveTest-Client-X25519)
+PASSED (KeyExchangeInfo-ECDHE-Server)
+PASSED (KeyExchangeInfo-ECDHE-Client)
+FAILED (Basic-Client-RenewTicket-Sync)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+new session was not cached, but we expected the opposite
+
+PASSED (Basic-Client-NoTicket-Sync)
+PASSED (KeyExchangeInfo-DHE-Client)
+PASSED (Basic-Client-Sync)
+PASSED (Basic-Server-Sync)
+PASSED (Basic-Server-EarlyCallback-Sync)
+PASSED (Basic-Server-Implicit-Sync)
+PASSED (Basic-Server-NoTickets-Sync)
+PASSED (ClientAuth-NoCertificate-Client-Sync)
+PASSED (Basic-Client-Implicit-Sync)
+FAILED (ClientAuth-NoCertificate-Client-SSL3-Sync)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47611472195008:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+PASSED (ClientAuth-NoCertificate-Server-Sync)
+FAILED (ClientAuth-NoCertificate-Server-SSL3-Sync)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+46951003454912:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (ClientAuth-NoCertificate-OldCallback-Sync)
+PASSED (ClientAuth-OldCallback-Sync)
+PASSED (KeyExchangeInfo-DHE-Server)
+PASSED (ClientAuth-RSA-Client-Sync)
+PASSED (ClientAuth-ECDSA-Client-Sync)
+PASSED (SessionTicketsDisabled-Server-Sync)
+PASSED (EmptyPSKHint-Client-Sync)
+PASSED (OCSPStapling-Client-Sync)
+PASSED (SessionTicketsDisabled-Client-Sync)
+PASSED (EmptyPSKHint-Server-Sync)
+PASSED (OCSPStapling-Server-Sync)
+PASSED (CertificateVerificationFail-Sync)
+PASSED (CurveTest-Client-P-384)
+PASSED (ClientAuth-Server-Sync)
+PASSED (CertificateVerificationSucceed-Sync)
+PASSED (CurveTest-Server-P-384)
+PASSED (CertificateVerificationSoftFail-Sync)
+PASSED (FalseStart-Sync)
+FAILED (Renegotiate-Client-Sync)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (FalseStart-Implicit-Sync)
+PASSED (FalseStart-ALPN-Sync)
+PASSED (NPN-Client-Sync)
+PASSED (ChannelID-Client-Sync)
+PASSED (FalseStart-SessionTicketsDisabled-Sync)
+PASSED (ChannelID-Server-Sync)
+FAILED (NPN-Server-Sync)
+unexpected failure: local error 'next proto mismatch: got , wanted bar', child error 'exit status 1', stdout:
+
+stderr:
+negotiated next proto mismatch
+
+FAILED (SendV2ClientHello-Sync)
+unexpected failure: local error 'remote error: error decoding message', child error 'exit status 1', stdout:
+
+stderr:
+47496315223488:error:1417D0BB:SSL routines:tls_process_client_hello:no compression specified:ssl/statem/statem_srvr.c:1282:
+
+PASSED (Basic-Server-NoTickets-DTLS-Sync)
+PASSED (Shutdown-Runner-Sync)
+FAILED (Shutdown-Shim-Sync)
+unexpected failure: local error 'none', child error 'exit status 1', stdout:
+
+stderr:
+Unexpected SSL_shutdown result: -1 != 1
+
+PASSED (Basic-Client-DTLS-Sync)
+PASSED (Basic-Server-DTLS-Sync)
+PASSED (Basic-Client-NoTicket-DTLS-Sync)
+PASSED (Basic-Server-Implicit-DTLS-Sync)
+PASSED (ClientAuth-NoCertificate-OldCallback-DTLS-Sync)
+FAILED (Basic-Client-RenewTicket-DTLS-Sync)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+new session was not cached, but we expected the opposite
+
+PASSED (Basic-Server-EarlyCallback-DTLS-Sync)
+PASSED (Basic-Client-Implicit-DTLS-Sync)
+PASSED (ClientAuth-OldCallback-DTLS-Sync)
+PASSED (ClientAuth-NoCertificate-Server-DTLS-Sync)
+PASSED (CurveTest-Server-P-521)
+PASSED (EmptyPSKHint-Client-DTLS-Sync)
+PASSED (ClientAuth-NoCertificate-Client-DTLS-Sync)
+PASSED (OCSPStapling-Client-DTLS-Sync)
+PASSED (SessionTicketsDisabled-Server-DTLS-Sync)
+PASSED (OCSPStapling-Server-DTLS-Sync)
+PASSED (EmptyPSKHint-Server-DTLS-Sync)
+PASSED (CurveTest-Client-P-521)
+PASSED (SessionTicketsDisabled-Client-DTLS-Sync)
+PASSED (ClientAuth-Server-DTLS-Sync)
+PASSED (ClientAuth-RSA-Client-DTLS-Sync)
+PASSED (ClientAuth-ECDSA-Client-DTLS-Sync)
+PASSED (CertificateVerificationSucceed-DTLS-Sync)
+PASSED (SkipHelloVerifyRequest-DTLS-Sync)
+PASSED (CertificateVerificationSoftFail-DTLS-Sync)
+PASSED (CertificateVerificationFail-DTLS-Sync)
+PASSED (Basic-Client-NoTicket-Sync-SplitHandshakeRecords)
+PASSED (Basic-Server-EarlyCallback-Sync-SplitHandshakeRecords)
+PASSED (Basic-Client-Sync-SplitHandshakeRecords)
+FAILED (Basic-Client-RenewTicket-Sync-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+new session was not cached, but we expected the opposite
+
+PASSED (Basic-Server-Implicit-Sync-SplitHandshakeRecords)
+PASSED (ClientAuth-NoCertificate-Server-Sync-SplitHandshakeRecords)
+PASSED (Basic-Server-NoTickets-Sync-SplitHandshakeRecords)
+FAILED (ClientAuth-NoCertificate-Client-SSL3-Sync-SplitHandshakeRecords)
+unexpected failure: local error 'tls: received record with version 303 when expecting version 300', child error 'exit status 1', stdout:
+
+stderr:
+47443598958016:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+FAILED (ClientAuth-NoCertificate-Server-SSL3-Sync-SplitHandshakeRecords)
+unexpected failure: local error 'remote error: handshake failure', child error 'exit status 1', stdout:
+
+stderr:
+47865819135424:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (ClientAuth-NoCertificate-OldCallback-Sync-SplitHandshakeRecords)
+PASSED (ClientAuth-OldCallback-Sync-SplitHandshakeRecords)
+PASSED (Basic-Client-Implicit-Sync-SplitHandshakeRecords)
+PASSED (Basic-Server-Sync-SplitHandshakeRecords)
+PASSED (ClientAuth-NoCertificate-Client-Sync-SplitHandshakeRecords)
+PASSED (OCSPStapling-Server-Sync-SplitHandshakeRecords)
+PASSED (OCSPStapling-Client-Sync-SplitHandshakeRecords)
+PASSED (EmptyPSKHint-Server-Sync-SplitHandshakeRecords)
+PASSED (EmptyPSKHint-Client-Sync-SplitHandshakeRecords)
+PASSED (SessionTicketsDisabled-Server-Sync-SplitHandshakeRecords)
+PASSED (CertificateVerificationFail-Sync-SplitHandshakeRecords)
+PASSED (FalseStart-Sync-SplitHandshakeRecords)
+PASSED (SessionTicketsDisabled-Client-Sync-SplitHandshakeRecords)
+PASSED (ClientAuth-Server-Sync-SplitHandshakeRecords)
+PASSED (ClientAuth-RSA-Client-Sync-SplitHandshakeRecords)
+PASSED (FalseStart-ALPN-Sync-SplitHandshakeRecords)
+PASSED (FalseStart-Implicit-Sync-SplitHandshakeRecords)
+PASSED (FalseStart-SessionTicketsDisabled-Sync-SplitHandshakeRecords)
+FAILED (NPN-Server-Sync-SplitHandshakeRecords)
+unexpected failure: local error 'next proto mismatch: got , wanted bar', child error 'exit status 1', stdout:
+
+stderr:
+negotiated next proto mismatch
+
+FAILED (SendV2ClientHello-Sync-SplitHandshakeRecords)
+unexpected failure: local error 'remote error: error decoding message', child error 'exit status 1', stdout:
+
+stderr:
+46938049093056:error:1417D0BB:SSL routines:tls_process_client_hello:no compression specified:ssl/statem/statem_srvr.c:1282:
+
+PASSED (ChannelID-Client-Sync-SplitHandshakeRecords)
+PASSED (ChannelID-Server-Sync-SplitHandshakeRecords)
+PASSED (ClientAuth-ECDSA-Client-Sync-SplitHandshakeRecords)
+PASSED (CertificateVerificationSucceed-Sync-SplitHandshakeRecords)
+PASSED (CertificateVerificationSoftFail-Sync-SplitHandshakeRecords)
+FAILED (Shutdown-Shim-Sync-SplitHandshakeRecords)
+unexpected failure: local error 'none', child error 'exit status 1', stdout:
+
+stderr:
+Unexpected SSL_shutdown result: -1 != 1
+
+FAILED (Renegotiate-Client-Sync-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (Basic-Server-EarlyCallback-DTLS-Sync-SplitHandshakeRecords)
+PASSED (Shutdown-Runner-Sync-SplitHandshakeRecords)
+PASSED (NPN-Client-Sync-SplitHandshakeRecords)
+FAILED (Basic-Server-DTLS-Sync-SplitHandshakeRecords)
+unexpected failure: local error 'dtls: exceeded maximum packet length', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (ClientAuth-NoCertificate-OldCallback-DTLS-Sync-SplitHandshakeRecords)
+FAILED (Basic-Client-NoTicket-DTLS-Sync-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Basic-Client-RenewTicket-DTLS-Sync-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Basic-Server-Implicit-DTLS-Sync-SplitHandshakeRecords)
+unexpected failure: local error 'dtls: exceeded maximum packet length', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Basic-Client-Implicit-DTLS-Sync-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (ClientAuth-OldCallback-DTLS-Sync-SplitHandshakeRecords)
+PASSED (SessionTicketsDisabled-Server-DTLS-Sync-SplitHandshakeRecords)
+PASSED (EmptyPSKHint-Client-DTLS-Sync-SplitHandshakeRecords)
+FAILED (ClientAuth-ECDSA-Client-DTLS-Sync-SplitHandshakeRecords)
+unexpected failure: local error 'dtls: exceeded maximum packet length', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Basic-Client-DTLS-Sync-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (Basic-Server-NoTickets-DTLS-Sync-SplitHandshakeRecords)
+FAILED (ClientAuth-NoCertificate-Server-DTLS-Sync-SplitHandshakeRecords)
+unexpected failure: local error 'dtls: exceeded maximum packet length', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (OCSPStapling-Client-DTLS-Sync-SplitHandshakeRecords)
+PASSED (OCSPStapling-Server-DTLS-Sync-SplitHandshakeRecords)
+PASSED (SessionTicketsDisabled-Client-DTLS-Sync-SplitHandshakeRecords)
+PASSED (ClientAuth-NoCertificate-Client-DTLS-Sync-SplitHandshakeRecords)
+PASSED (EmptyPSKHint-Server-DTLS-Sync-SplitHandshakeRecords)
+PASSED (ClientAuth-RSA-Client-DTLS-Sync-SplitHandshakeRecords)
+PASSED (CertificateVerificationSoftFail-DTLS-Sync-SplitHandshakeRecords)
+PASSED (CertificateVerificationFail-DTLS-Sync-SplitHandshakeRecords)
+PASSED (Basic-Client-Implicit-Async)
+PASSED (Basic-Server-EarlyCallback-Async)
+PASSED (Basic-Client-Async)
+PASSED (ClientAuth-Server-DTLS-Sync-SplitHandshakeRecords)
+PASSED (Basic-Server-Async)
+FAILED (Basic-Client-RenewTicket-Async)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+new session was not cached, but we expected the opposite
+
+PASSED (Basic-Server-Implicit-Async)
+PASSED (Basic-Client-NoTicket-Async)
+PASSED (ClientAuth-NoCertificate-OldCallback-Async)
+FAILED (ClientAuth-NoCertificate-Server-SSL3-Async)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47311055662528:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+PASSED (ClientAuth-OldCallback-Async)
+PASSED (Basic-Server-NoTickets-Async)
+PASSED (SkipHelloVerifyRequest-DTLS-Sync-SplitHandshakeRecords)
+PASSED (ClientAuth-NoCertificate-Server-Async)
+PASSED (CertificateVerificationSucceed-DTLS-Sync-SplitHandshakeRecords)
+PASSED (ClientAuth-NoCertificate-Client-Async)
+PASSED (ClientAuth-ECDSA-Client-Async)
+PASSED (Basic-Server-RSA-Async)
+FAILED (ClientAuth-NoCertificate-Client-SSL3-Async)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47317467864512:error:14171102:SSL routines:tls_process_server_hello:unsupported protocol:ssl/statem/statem_clnt.c:1044:
+
+PASSED (SessionTicketsDisabled-Server-Async)
+PASSED (Basic-Server-ECDHE-ECDSA-Async)
+PASSED (EmptyPSKHint-Server-Async)
+PASSED (ClientAuth-RSA-Client-Async)
+PASSED (OCSPStapling-Client-Async)
+PASSED (EmptyPSKHint-Client-Async)
+PASSED (Basic-Server-ECDHE-RSA-Async)
+PASSED (ClientAuth-Server-Async)
+PASSED (FalseStart-Async)
+PASSED (SessionTicketsDisabled-Client-Async)
+PASSED (OCSPStapling-Server-Async)
+PASSED (FalseStart-ALPN-Async)
+PASSED (FalseStart-Implicit-Async)
+FAILED (SendV2ClientHello-Async)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47289534672320:error:1417D0BB:SSL routines:tls_process_client_hello:no compression specified:ssl/statem/statem_srvr.c:1282:
+
+PASSED (CertificateVerificationFail-Async)
+PASSED (ChannelID-Client-Async)
+PASSED (CertificateVerificationSucceed-Async)
+FAILED (NPN-Server-Async)
+unexpected failure: local error 'next proto mismatch: got , wanted bar', child error 'exit status 1', stdout:
+
+stderr:
+negotiated next proto mismatch
+
+PASSED (FalseStart-SessionTicketsDisabled-Async)
+PASSED (ChannelID-Server-Async)
+PASSED (NPN-Client-Async)
+FAILED (Basic-Client-RenewTicket-DTLS-Async)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Basic-Client-DTLS-Async)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Basic-Client-NoTicket-DTLS-Async)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (CertificateVerificationSoftFail-Async)
+PASSED (Renegotiate-Client-Async)
+PASSED (Basic-Server-EarlyCallback-DTLS-Async)
+FAILED (ClientAuth-NoCertificate-Client-DTLS-Async)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (ClientAuth-RSA-Client-DTLS-Async)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (ClientAuth-ECDSA-Client-DTLS-Async)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (Basic-Server-NoTickets-DTLS-Async)
+PASSED (Basic-Server-DTLS-Async)
+FAILED (Shutdown-Shim-Async)
+unexpected failure: local error 'none', child error 'exit status 1', stdout:
+
+stderr:
+Unexpected SSL_shutdown result: -1 != 1
+
+PASSED (Basic-Client-Implicit-DTLS-Async)
+PASSED (Shutdown-Runner-Async)
+PASSED (ClientAuth-NoCertificate-OldCallback-DTLS-Async)
+PASSED (ClientAuth-NoCertificate-Server-DTLS-Async)
+PASSED (ClientAuth-OldCallback-DTLS-Async)
+FAILED (EmptyPSKHint-Client-DTLS-Async)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (SessionTicketsDisabled-Server-DTLS-Async)
+PASSED (OCSPStapling-Server-DTLS-Async)
+PASSED (Basic-Server-RSA-DTLS-Async)
+PASSED (Basic-Server-ECDHE-RSA-DTLS-Async)
+PASSED (OCSPStapling-Client-DTLS-Async)
+PASSED (Basic-Server-ECDHE-ECDSA-DTLS-Async)
+FAILED (SessionTicketsDisabled-Client-DTLS-Async)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (EmptyPSKHint-Server-DTLS-Async)
+FAILED (CertificateVerificationSucceed-DTLS-Async)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (Basic-Server-Implicit-DTLS-Async)
+FAILED (CertificateVerificationSoftFail-DTLS-Async)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (CertificateVerificationFail-DTLS-Async)
+bad error (wanted ':CERTIFICATE_VERIFY_FAILED:' / ''): local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (SkipHelloVerifyRequest-DTLS-Async)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (Basic-Server-EarlyCallback-Async-SplitHandshakeRecords)
+PASSED (ClientAuth-Server-DTLS-Async)
+FAILED (Basic-Server-Implicit-Async-SplitHandshakeRecords)
+unexpected failure: local error 'remote error: unexpected message', child error 'exit status 1', stdout:
+
+stderr:
+47848024341952:error:141600F4:SSL routines:read_state_machine:unexpected message:ssl/statem/statem.c:580:
+
+FAILED (Basic-Server-NoTickets-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47216607677888:error:141600F4:SSL routines:read_state_machine:unexpected message:ssl/statem/statem.c:580:
+
+FAILED (ClientAuth-NoCertificate-Server-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47100009467328:error:141600F4:SSL routines:read_state_machine:unexpected message:ssl/statem/statem.c:580:
+
+PASSED (ClientAuth-NoCertificate-OldCallback-Async-SplitHandshakeRecords)
+FAILED (ClientAuth-NoCertificate-Server-SSL3-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47640383663552:error:1417D18C:SSL routines:tls_process_client_hello:version too low:ssl/statem/statem_srvr.c:1053:
+
+FAILED (Basic-Server-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47137002450368:error:141600F4:SSL routines:read_state_machine:unexpected message:ssl/statem/statem.c:580:
+
+PASSED (ClientAuth-OldCallback-Async-SplitHandshakeRecords)
+FAILED (Basic-Server-RSA-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47579399425472:error:141600F4:SSL routines:read_state_machine:unexpected message:ssl/statem/statem.c:580:
+
+FAILED (Basic-Server-ECDHE-ECDSA-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47935990042048:error:141600F4:SSL routines:read_state_machine:unexpected message:ssl/statem/statem.c:580:
+
+FAILED (Basic-Server-ECDHE-RSA-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47463475944896:error:141600F4:SSL routines:read_state_machine:unexpected message:ssl/statem/statem.c:580:
+
+FAILED (SessionTicketsDisabled-Server-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47966247337408:error:141600F4:SSL routines:read_state_machine:unexpected message:ssl/statem/statem.c:580:
+
+FAILED (ClientAuth-Server-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+46921002843584:error:141600F4:SSL routines:read_state_machine:unexpected message:ssl/statem/statem.c:580:
+
+FAILED (EmptyPSKHint-Server-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47534889029056:error:141600F4:SSL routines:read_state_machine:unexpected message:ssl/statem/statem.c:580:
+
+PASSED (OCSPStapling-Client-Async-SplitHandshakeRecords)
+PASSED (OCSPStapling-Server-Async-SplitHandshakeRecords)
+FAILED (MixCompleteMessageWithFragments-DTLS)
+unexpected failure: local error 'read tcp4 127.0.0.1:56625->127.0.0.1:37811: i/o timeout', child error 'exit status 1', stdout:
+
+stderr:
+dtls1_retransmit_message() failed
+
+FAILED (Basic-Client-NoTicket-Async-SplitHandshakeRecords)
+unexpected failure: local error 'read tcp4 127.0.0.1:33745->127.0.0.1:54788: i/o timeout', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Basic-Client-RenewTicket-Async-SplitHandshakeRecords)
+unexpected failure: local error 'read tcp4 127.0.0.1:45472->127.0.0.1:54741: i/o timeout', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Basic-Client-Implicit-Async-SplitHandshakeRecords)
+unexpected failure: local error 'read tcp4 127.0.0.1:57953->127.0.0.1:56078: i/o timeout', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (ClientAuth-NoCertificate-Client-Async-SplitHandshakeRecords)
+unexpected failure: local error 'read tcp4 127.0.0.1:41980->127.0.0.1:48314: i/o timeout', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Basic-Client-Async-SplitHandshakeRecords)
+unexpected failure: local error 'read tcp4 127.0.0.1:51445->127.0.0.1:39369: i/o timeout', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (ClientAuth-NoCertificate-Client-SSL3-Async-SplitHandshakeRecords)
+unexpected failure: local error 'read tcp4 127.0.0.1:58821->127.0.0.1:50648: i/o timeout', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (FalseStart-Async-SplitHandshakeRecords)
+PASSED (FalseStart-ALPN-Async-SplitHandshakeRecords)
+PASSED (FalseStart-Implicit-Async-SplitHandshakeRecords)
+FAILED (ClientAuth-RSA-Client-Async-SplitHandshakeRecords)
+unexpected failure: local error 'read tcp4 127.0.0.1:50063->127.0.0.1:56697: i/o timeout', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (FalseStart-SessionTicketsDisabled-Async-SplitHandshakeRecords)
+FAILED (NPN-Server-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47098855226816:error:141600F4:SSL routines:read_state_machine:unexpected message:ssl/statem/statem.c:580:
+
+PASSED (ChannelID-Client-Async-SplitHandshakeRecords)
+FAILED (SendV2ClientHello-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+47137568206272:error:1417D0BB:SSL routines:tls_process_client_hello:no compression specified:ssl/statem/statem_srvr.c:1282:
+
+PASSED (ChannelID-Server-Async-SplitHandshakeRecords)
+FAILED (ClientAuth-ECDSA-Client-Async-SplitHandshakeRecords)
+unexpected failure: local error 'read tcp4 127.0.0.1:58894->127.0.0.1:38680: i/o timeout', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Basic-Client-DTLS-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Basic-Client-RenewTicket-DTLS-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Basic-Client-NoTicket-DTLS-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (SessionTicketsDisabled-Client-Async-SplitHandshakeRecords)
+unexpected failure: local error 'read tcp4 127.0.0.1:56318->127.0.0.1:50440: i/o timeout', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Basic-Server-DTLS-Async-SplitHandshakeRecords)
+unexpected failure: local error 'dtls: exceeded maximum packet length', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (Basic-Server-EarlyCallback-DTLS-Async-SplitHandshakeRecords)
+FAILED (Basic-Server-Implicit-DTLS-Async-SplitHandshakeRecords)
+unexpected failure: local error 'dtls: exceeded maximum packet length', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (EmptyPSKHint-Client-Async-SplitHandshakeRecords)
+unexpected failure: local error 'read tcp4 127.0.0.1:60862->127.0.0.1:46563: i/o timeout', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (ClientAuth-NoCertificate-Client-DTLS-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (Basic-Server-NoTickets-DTLS-Async-SplitHandshakeRecords)
+FAILED (ClientAuth-RSA-Client-DTLS-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (ClientAuth-NoCertificate-OldCallback-DTLS-Async-SplitHandshakeRecords)
+FAILED (ClientAuth-ECDSA-Client-DTLS-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (ClientAuth-OldCallback-DTLS-Async-SplitHandshakeRecords)
+FAILED (ClientAuth-NoCertificate-Server-DTLS-Async-SplitHandshakeRecords)
+unexpected failure: local error 'dtls: exceeded maximum packet length', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Basic-Server-RSA-DTLS-Async-SplitHandshakeRecords)
+unexpected failure: local error 'dtls: exceeded maximum packet length', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Basic-Client-Implicit-DTLS-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Basic-Server-ECDHE-RSA-DTLS-Async-SplitHandshakeRecords)
+unexpected failure: local error 'dtls: exceeded maximum packet length', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (SessionTicketsDisabled-Client-DTLS-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (CertificateVerificationSucceed-Async-SplitHandshakeRecords)
+unexpected failure: local error 'read tcp4 127.0.0.1:50091->127.0.0.1:43731: i/o timeout', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Basic-Server-ECDHE-ECDSA-DTLS-Async-SplitHandshakeRecords)
+unexpected failure: local error 'dtls: exceeded maximum packet length', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (OCSPStapling-Client-DTLS-Async-SplitHandshakeRecords)
+FAILED (EmptyPSKHint-Client-DTLS-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (CertificateVerificationSucceed-DTLS-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (CertificateVerificationFail-DTLS-Async-SplitHandshakeRecords)
+bad error (wanted ':CERTIFICATE_VERIFY_FAILED:' / ''): local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (SessionTicketsDisabled-Server-DTLS-Async-SplitHandshakeRecords)
+PASSED (OCSPStapling-Server-DTLS-Async-SplitHandshakeRecords)
+PASSED (EmptyPSKHint-Server-DTLS-Async-SplitHandshakeRecords)
+FAILED (CertificateVerificationSoftFail-DTLS-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+PASSED (ClientAuth-Server-DTLS-Async-SplitHandshakeRecords)
+FAILED (SkipHelloVerifyRequest-DTLS-Async-SplitHandshakeRecords)
+unexpected failure: local error 'EOF', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (CertificateVerificationFail-Async-SplitHandshakeRecords)
+bad error (wanted ':CERTIFICATE_VERIFY_FAILED:' / ''): local error 'read tcp4 127.0.0.1:44489->127.0.0.1:49525: i/o timeout', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (CertificateVerificationSoftFail-Async-SplitHandshakeRecords)
+unexpected failure: local error 'read tcp4 127.0.0.1:47223->127.0.0.1:33462: i/o timeout', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Renegotiate-Client-Async-SplitHandshakeRecords)
+unexpected failure: local error 'read tcp4 127.0.0.1:35361->127.0.0.1:43288: i/o timeout', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (NPN-Client-Async-SplitHandshakeRecords)
+unexpected failure: local error 'read tcp4 127.0.0.1:60610->127.0.0.1:35302: i/o timeout', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Shutdown-Shim-Async-SplitHandshakeRecords)
+unexpected failure: local error 'read tcp4 127.0.0.1:57280->127.0.0.1:34498: i/o timeout', child error 'exit status 1', stdout:
+
+stderr:
+
+FAILED (Shutdown-Runner-Async-SplitHandshakeRecords)
+unexpected failure: local error 'read tcp4 127.0.0.1:55673->127.0.0.1:48960: i/o timeout', child error 'exit status 1', stdout:
+
+stderr:
+
+
+exit status 1
+FAIL	_/usr/local/google/home/ekasper/gob/openssl-tests/boringssl/ssl/test/runner	32.043s
