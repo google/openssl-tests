@@ -1,7 +1,7 @@
-From 05beae0459a820b2e3b97d7d5b50c354828b0c86 Mon Sep 17 00:00:00 2001
+From 6a3645fcc6570dc88436906536ec4ef0102e3f1d Mon Sep 17 00:00:00 2001
 From: David Benjamin <davidben@google.com>
-Date: Sat, 05 Mar 2016 11:56:13 -0500
-Subject: [PATCH] Make bssl_shim build against OpenSSL instead.
+Date: Sat, 5 Mar 2016 11:56:13 -0500
+Subject: [PATCH 1/2] Make bssl_shim build against OpenSSL instead.
 
 Copyright 2016 Google Inc. All rights reserved.
 
@@ -46,6 +46,14 @@ See ssl/test/runner/runner.go for additional options. The -debug and -gdb (or
 
 Change-Id: I74d832207b970f1910b1baf6abd20e5f255aecee
 ---
+ crypto/test/scoped_types.h |  44 +---
+ ssl/test/async_bio.cc      |   6 +-
+ ssl/test/bssl_shim.cc      | 490 +++++----------------------------------------
+ ssl/test/packeted_bio.cc   |  40 +---
+ ssl/test/packeted_bio.h    |   4 +-
+ ssl/test/runner/runner.go  |   7 +-
+ ssl/test/test_config.cc    |  16 +-
+ 7 files changed, 78 insertions(+), 529 deletions(-)
 
 diff --git a/crypto/test/scoped_types.h b/crypto/test/scoped_types.h
 index eef30e7..a1f6851 100644
@@ -74,7 +82,7 @@ index eef30e7..a1f6851 100644
  #include <openssl/rsa.h>
  #include <openssl/stack.h>
  #include <openssl/x509.h>
-@@ -74,29 +70,6 @@
+@@ -74,29 +70,6 @@ template<typename StackType, typename T, void (*func)(T*)>
  using ScopedOpenSSLStack =
      std::unique_ptr<StackType, OpenSSLStackDeleter<StackType, T, func>>;
  
@@ -104,7 +112,7 @@ index eef30e7..a1f6851 100644
  using ScopedASN1_TYPE = ScopedOpenSSLType<ASN1_TYPE, ASN1_TYPE_free>;
  using ScopedBIO = ScopedOpenSSLType<BIO, BIO_vfree>;
  using ScopedBIGNUM = ScopedOpenSSLType<BIGNUM, BN_free>;
-@@ -113,7 +86,6 @@
+@@ -113,7 +86,6 @@ using ScopedEVP_PKEY_CTX = ScopedOpenSSLType<EVP_PKEY_CTX, EVP_PKEY_CTX_free>;
  using ScopedPKCS8_PRIV_KEY_INFO = ScopedOpenSSLType<PKCS8_PRIV_KEY_INFO,
                                                      PKCS8_PRIV_KEY_INFO_free>;
  using ScopedPKCS12 = ScopedOpenSSLType<PKCS12, PKCS12_free>;
@@ -112,11 +120,10 @@ index eef30e7..a1f6851 100644
  using ScopedRSA = ScopedOpenSSLType<RSA, RSA_free>;
  using ScopedX509 = ScopedOpenSSLType<X509, X509_free>;
  using ScopedX509_ALGOR = ScopedOpenSSLType<X509_ALGOR, X509_ALGOR_free>;
-@@ -121,18 +93,6 @@
- using ScopedX509_STORE_CTX = ScopedOpenSSLType<X509_STORE_CTX, X509_STORE_CTX_free>;
+@@ -122,18 +94,6 @@ using ScopedX509_STORE_CTX = ScopedOpenSSLType<X509_STORE_CTX, X509_STORE_CTX_fr
  
  using ScopedX509Stack = ScopedOpenSSLStack<STACK_OF(X509), X509, X509_free>;
--
+ 
 -using ScopedCBB = ScopedOpenSSLContext<CBB, void, CBB_zero, CBB_cleanup>;
 -using ScopedEVP_AEAD_CTX = ScopedOpenSSLContext<EVP_AEAD_CTX, void,
 -                                                EVP_AEAD_CTX_zero,
@@ -128,9 +135,10 @@ index eef30e7..a1f6851 100644
 -                                              EVP_MD_CTX_cleanup>;
 -using ScopedHMAC_CTX = ScopedOpenSSLContext<HMAC_CTX, void, HMAC_CTX_init,
 -                                            HMAC_CTX_cleanup>;
- 
+-
  using ScopedOpenSSLBytes = std::unique_ptr<uint8_t, OpenSSLFree<uint8_t>>;
  using ScopedOpenSSLString = std::unique_ptr<char, OpenSSLFree<char>>;
+ 
 diff --git a/ssl/test/async_bio.cc b/ssl/test/async_bio.cc
 index 7a5737b..965a0fb 100644
 --- a/ssl/test/async_bio.cc
@@ -150,7 +158,7 @@ index 7a5737b..965a0fb 100644
  
  struct AsyncBio {
    bool datagram;
-@@ -135,7 +135,7 @@
+@@ -135,7 +135,7 @@ static long AsyncCallbackCtrl(BIO *bio, int cmd, bio_info_cb fp) {
    return BIO_callback_ctrl(bio->next_bio, cmd, fp);
  }
  
@@ -202,7 +210,7 @@ index 7da64bb..7de6aa3 100644
  static int closesocket(int sock) {
    return close(sock);
  }
-@@ -94,7 +94,6 @@
+@@ -94,7 +94,6 @@ struct TestState {
    // clock_delta is how far the clock advanced in the most recent failed
    // |BIO_read|.
    timeval clock_delta;
@@ -210,7 +218,7 @@ index 7da64bb..7de6aa3 100644
    bool cert_ready = false;
    ScopedSSL_SESSION session;
    ScopedSSL_SESSION pending_session;
-@@ -154,143 +153,6 @@
+@@ -154,143 +153,6 @@ static ScopedEVP_PKEY LoadPrivateKey(const std::string &file) {
    return ScopedEVP_PKEY(PEM_read_bio_PrivateKey(bio.get(), NULL, NULL, NULL));
  }
  
@@ -354,7 +362,7 @@ index 7da64bb..7de6aa3 100644
  template<typename T>
  struct Free {
    void operator()(T *buf) {
-@@ -303,24 +165,8 @@
+@@ -303,24 +165,8 @@ static bool GetCertificate(SSL *ssl, ScopedX509 *out_x509,
    const TestConfig *config = GetConfigPtr(ssl);
  
    if (!config->digest_prefs.empty()) {
@@ -381,7 +389,7 @@ index 7da64bb..7de6aa3 100644
    }
  
    if (!config->key_file.empty()) {
-@@ -335,10 +181,8 @@
+@@ -335,10 +181,8 @@ static bool GetCertificate(SSL *ssl, ScopedX509 *out_x509,
        return false;
      }
    }
@@ -394,7 +402,7 @@ index 7da64bb..7de6aa3 100644
      return false;
    }
    return true;
-@@ -354,10 +198,7 @@
+@@ -354,10 +198,7 @@ static bool InstallCertificate(SSL *ssl) {
    if (pkey) {
      TestState *test_state = GetTestState(ssl);
      const TestConfig *config = GetConfigPtr(ssl);
@@ -406,12 +414,10 @@ index 7da64bb..7de6aa3 100644
        return false;
      }
    }
-@@ -367,58 +208,6 @@
-   }
- 
+@@ -369,58 +210,6 @@ static bool InstallCertificate(SSL *ssl) {
    return true;
--}
--
+ }
+ 
 -static int SelectCertificateCallback(const struct ssl_early_callback_ctx *ctx) {
 -  const TestConfig *config = GetConfigPtr(ctx->ssl);
 -  GetTestState(ctx->ssl)->early_callback_called = true;
@@ -462,10 +468,12 @@ index 7da64bb..7de6aa3 100644
 -    }
 -  }
 -  return 1;
- }
- 
+-}
+-
  static int ClientCertCallback(SSL *ssl, X509 **out_x509, EVP_PKEY **out_pkey) {
-@@ -444,20 +233,6 @@
+   if (GetConfigPtr(ssl)->async && !GetTestState(ssl)->cert_ready) {
+     return -1;
+@@ -444,20 +233,6 @@ static int ClientCertCallback(SSL *ssl, X509 **out_x509, EVP_PKEY **out_pkey) {
  }
  
  static int VerifySucceed(X509_STORE_CTX *store_ctx, void *arg) {
@@ -486,7 +494,7 @@ index 7da64bb..7de6aa3 100644
    return 1;
  }
  
-@@ -552,44 +327,11 @@
+@@ -552,14 +327,6 @@ static unsigned PskServerCallback(SSL *ssl, const char *identity,
    return config->psk.size();
  }
  
@@ -501,13 +509,10 @@ index 7da64bb..7de6aa3 100644
  static int CertCallback(SSL *ssl, void *arg) {
    if (!GetTestState(ssl)->cert_ready) {
      return -1;
-   }
-   if (!InstallCertificate(ssl)) {
--    return 0;
--  }
--  return 1;
--}
--
+@@ -570,31 +337,6 @@ static int CertCallback(SSL *ssl, void *arg) {
+   return 1;
+ }
+ 
 -static SSL_SESSION *GetSessionCallback(SSL *ssl, uint8_t *data, int len,
 -                                       int *copy) {
 -  TestState *async_state = GetTestState(ssl);
@@ -528,10 +533,15 @@ index 7da64bb..7de6aa3 100644
 -  callback_num++;
 -  if (config->fail_ddos_callback ||
 -      (config->fail_second_ddos_callback && callback_num == 2)) {
-     return 0;
-   }
-   return 1;
-@@ -769,18 +511,12 @@
+-    return 0;
+-  }
+-  return 1;
+-}
+-
+ static void InfoCallback(const SSL *ssl, int type, int val) {
+   if (type == SSL_CB_HANDSHAKE_DONE) {
+     if (GetConfigPtr(ssl)->handshake_never_done) {
+@@ -769,18 +511,12 @@ static ScopedSSL_CTX SetupCtx(const TestConfig *config) {
      return nullptr;
    }
  
@@ -553,7 +563,7 @@ index 7da64bb..7de6aa3 100644
  
    if (config->use_sparse_dh_prime) {
      // This prime number is 2^1024 + 643 – a value just above a power of two.
-@@ -798,24 +534,14 @@
+@@ -798,24 +534,14 @@ static ScopedSSL_CTX SetupCtx(const TestConfig *config) {
      }
      BN_free(dh->q);
      dh->q = NULL;
@@ -580,19 +590,19 @@ index 7da64bb..7de6aa3 100644
  
    if (config->use_old_client_cert_callback) {
      SSL_CTX_set_client_cert_cb(ssl_ctx.get(), ClientCertCallback);
-@@ -831,11 +557,6 @@
-   if (!config->select_alpn.empty()) {
+@@ -832,11 +558,6 @@ static ScopedSSL_CTX SetupCtx(const TestConfig *config) {
      SSL_CTX_set_alpn_select_cb(ssl_ctx.get(), AlpnSelectCallback, NULL);
    }
--
+ 
 -  SSL_CTX_enable_tls_channel_id(ssl_ctx.get());
 -  SSL_CTX_set_channel_id_cb(ssl_ctx.get(), ChannelIdCallback);
 -
 -  ssl_ctx->current_time_cb = CurrentTimeCallback;
- 
+-
    SSL_CTX_set_info_callback(ssl_ctx.get(), InfoCallback);
    SSL_CTX_sess_set_new_cb(ssl_ctx.get(), NewSessionCallback);
-@@ -866,10 +587,8 @@
+ 
+@@ -866,10 +587,8 @@ static ScopedSSL_CTX SetupCtx(const TestConfig *config) {
      SSL_CTX_set_cert_verify_callback(ssl_ctx.get(), VerifySucceed, NULL);
    }
  
@@ -605,7 +615,7 @@ index 7da64bb..7de6aa3 100644
      return nullptr;
    }
  
-@@ -922,25 +641,8 @@
+@@ -922,26 +641,9 @@ static bool RetryAsync(SSL *ssl, int ret) {
      case SSL_ERROR_WANT_WRITE:
        AsyncBioAllowWrite(test_state->async_bio, 1);
        return true;
@@ -619,7 +629,7 @@ index 7da64bb..7de6aa3 100644
 -    }
      case SSL_ERROR_WANT_X509_LOOKUP:
        test_state->cert_ready = true;
--      return true;
+       return true;
 -    case SSL_ERROR_PENDING_SESSION:
 -      test_state->session = std::move(test_state->pending_session);
 -      return true;
@@ -628,10 +638,11 @@ index 7da64bb..7de6aa3 100644
 -      return InstallCertificate(ssl);
 -    case SSL_ERROR_WANT_PRIVATE_KEY_OPERATION:
 -      test_state->private_key_retries++;
-       return true;
+-      return true;
      default:
        return false;
-@@ -1031,11 +733,6 @@
+   }
+@@ -1031,11 +733,6 @@ static bool CheckHandshakeProperties(SSL *ssl, bool is_resume) {
      }
    }
  
@@ -643,7 +654,7 @@ index 7da64bb..7de6aa3 100644
    if (!config->expected_server_name.empty()) {
      const char *server_name =
          SSL_get_servername(ssl, TLSEXT_NAMETYPE_host_name);
-@@ -1083,50 +780,6 @@
+@@ -1083,50 +780,6 @@ static bool CheckHandshakeProperties(SSL *ssl, bool is_resume) {
      }
    }
  
@@ -694,14 +705,10 @@ index 7da64bb..7de6aa3 100644
    if (config->expect_verify_result) {
      int expected_verify_result = config->verify_fail ?
        X509_V_ERR_APPLICATION_VERIFICATION :
-@@ -1134,24 +787,6 @@
+@@ -1138,24 +791,6 @@ static bool CheckHandshakeProperties(SSL *ssl, bool is_resume) {
+     }
+   }
  
-     if (SSL_get_verify_result(ssl) != expected_verify_result) {
-       fprintf(stderr, "Wrong certificate verification result\n");
--      return false;
--    }
--  }
--
 -  if (config->expect_server_key_exchange_hash != 0 &&
 -      config->expect_server_key_exchange_hash !=
 -          SSL_get_server_key_exchange_hash(ssl)) {
@@ -716,10 +723,14 @@ index 7da64bb..7de6aa3 100644
 -    if (static_cast<uint32_t>(config->expect_key_exchange_info) != info) {
 -      fprintf(stderr, "key_exchange_info was %" PRIu32 ", wanted %" PRIu32 "\n",
 -              info, static_cast<uint32_t>(config->expect_key_exchange_info));
-       return false;
-     }
-   }
-@@ -1199,6 +834,9 @@
+-      return false;
+-    }
+-  }
+-
+   if (!config->is_server) {
+     /* Clients should expect a peer certificate chain iff this was not a PSK
+      * cipher suite. */
+@@ -1199,6 +834,9 @@ static bool DoExchange(ScopedSSL_SESSION *out_session, SSL_CTX *ssl_ctx,
      } else if (!InstallCertificate(ssl.get())) {
        return false;
      }
@@ -729,7 +740,7 @@ index 7da64bb..7de6aa3 100644
    }
    if (config->require_any_client_certificate) {
      SSL_set_verify(ssl.get(), SSL_VERIFY_PEER|SSL_VERIFY_FAIL_IF_NO_PEER_CERT,
-@@ -1208,10 +846,8 @@
+@@ -1208,10 +846,8 @@ static bool DoExchange(ScopedSSL_SESSION *out_session, SSL_CTX *ssl_ctx,
      SSL_set_verify(ssl.get(), SSL_VERIFY_PEER, NULL);
    }
    if (config->false_start) {
@@ -742,7 +753,7 @@ index 7da64bb..7de6aa3 100644
    }
    if (config->partial_write) {
      SSL_set_mode(ssl.get(), SSL_MODE_ENABLE_PARTIAL_WRITE);
-@@ -1229,17 +865,12 @@
+@@ -1229,17 +865,12 @@ static bool DoExchange(ScopedSSL_SESSION *out_session, SSL_CTX *ssl_ctx,
      SSL_set_options(ssl.get(), SSL_OP_NO_SSLv3);
    }
    if (!config->expected_channel_id.empty()) {
@@ -764,7 +775,7 @@ index 7da64bb..7de6aa3 100644
    }
    if (!config->host_name.empty() &&
        !SSL_set_tlsext_host_name(ssl.get(), config->host_name.c_str())) {
-@@ -1260,44 +891,48 @@
+@@ -1260,44 +891,48 @@ static bool DoExchange(ScopedSSL_SESSION *out_session, SSL_CTX *ssl_ctx,
      return false;
    }
    if (!config->srtp_profiles.empty() &&
@@ -825,7 +836,7 @@ index 7da64bb..7de6aa3 100644
    }
    if (config->p384_only) {
      int nid = NID_secp384r1;
-@@ -1346,18 +981,17 @@
+@@ -1346,18 +981,17 @@ static bool DoExchange(ScopedSSL_SESSION *out_session, SSL_CTX *ssl_ctx,
        if (SSL_set_session(ssl.get(), session) != 1) {
          return false;
        }
@@ -848,7 +859,7 @@ index 7da64bb..7de6aa3 100644
  
    int ret;
    if (config->implicit_handshake) {
-@@ -1387,11 +1021,11 @@
+@@ -1387,11 +1021,11 @@ static bool DoExchange(ScopedSSL_SESSION *out_session, SSL_CTX *ssl_ctx,
    if (config->export_keying_material > 0) {
      std::vector<uint8_t> result(
          static_cast<size_t>(config->export_keying_material));
@@ -862,7 +873,7 @@ index 7da64bb..7de6aa3 100644
        fprintf(stderr, "failed to export keying material\n");
        return false;
      }
-@@ -1401,23 +1035,8 @@
+@@ -1401,23 +1035,8 @@ static bool DoExchange(ScopedSSL_SESSION *out_session, SSL_CTX *ssl_ctx,
    }
  
    if (config->tls_unique) {
@@ -888,7 +899,7 @@ index 7da64bb..7de6aa3 100644
    }
  
    if (config->write_different_record_sizes) {
-@@ -1528,7 +1147,7 @@
+@@ -1528,7 +1147,7 @@ static bool DoExchange(ScopedSSL_SESSION *out_session, SSL_CTX *ssl_ctx,
  
    if (SSL_total_renegotiations(ssl.get()) !=
        config->expect_total_renegotiations) {
@@ -897,7 +908,7 @@ index 7da64bb..7de6aa3 100644
              config->expect_total_renegotiations,
              SSL_total_renegotiations(ssl.get()));
      return false;
-@@ -1564,7 +1183,8 @@
+@@ -1564,7 +1183,8 @@ int main(int argc, char **argv) {
    signal(SIGPIPE, SIG_IGN);
  #endif
  
@@ -930,7 +941,7 @@ index e831082..dd97df1 100644
  
  // ReadAll reads |len| bytes from |bio| into |out|. It returns 1 on success and
  // 0 or -1 on error.
-@@ -94,38 +93,7 @@
+@@ -94,38 +93,7 @@ static int PacketedRead(BIO *bio, char *out, int outl) {
    }
  
    if (opcode == kOpcodeTimeout) {
@@ -970,7 +981,7 @@ index e831082..dd97df1 100644
      return -1;
    }
  
-@@ -193,7 +161,7 @@
+@@ -193,7 +161,7 @@ static long PacketedCallbackCtrl(BIO *bio, int cmd, bio_info_cb fp) {
    return BIO_callback_ctrl(bio->next_bio, cmd, fp);
  }
  
@@ -1002,7 +1013,7 @@ diff --git a/ssl/test/runner/runner.go b/ssl/test/runner/runner.go
 index e81786d..66b3f57 100644
 --- a/ssl/test/runner/runner.go
 +++ b/ssl/test/runner/runner.go
-@@ -818,6 +818,11 @@
+@@ -818,6 +818,11 @@ func runTest(test *testCase, shimPath string, mallocNumToFail int64) error {
  
  	failed := err != nil || childErr != nil
  	correctFailure := len(test.expectedError) == 0 || strings.Contains(stderr, test.expectedError)
@@ -1014,7 +1025,7 @@ index e81786d..66b3f57 100644
  	localError := "none"
  	if err != nil {
  		localError = err.Error()
-@@ -826,7 +831,7 @@
+@@ -826,7 +831,7 @@ func runTest(test *testCase, shimPath string, mallocNumToFail int64) error {
  		correctFailure = correctFailure && strings.Contains(localError, test.expectedLocalError)
  	}
  
@@ -1036,7 +1047,7 @@ index dfbd380..75b03f2 100644
  
  namespace {
  
-@@ -177,15 +177,11 @@
+@@ -177,15 +177,11 @@ bool ParseConfig(int argc, char **argv, TestConfig *out_config) {
          fprintf(stderr, "Missing parameter\n");
          return false;
        }
@@ -1057,3 +1068,403 @@ index dfbd380..75b03f2 100644
          fprintf(stderr, "Invalid base64: %s\n", argv[i]);
          return false;
        }
+-- 
+2.7.4
+
+
+From 1fd30c3bf39c95555464d9cf52e1436e16c9faa8 Mon Sep 17 00:00:00 2001
+From: Matt Caswell <matt@openssl.org>
+Date: Tue, 21 Jun 2016 12:06:26 +0100
+Subject: [PATCH 2/2] Update bssl_shim for some opaque changes
+
+BIO, DH and STORE_CTX were made opaque. These changes enable bssl_shim to
+build against the latest master version
+---
+ ssl/test/async_bio.cc    | 72 +++++++++++++++++++++++++++---------------------
+ ssl/test/bssl_shim.cc    | 29 ++++++++++++++-----
+ ssl/test/packeted_bio.cc | 63 ++++++++++++++++++++++--------------------
+ 3 files changed, 95 insertions(+), 69 deletions(-)
+
+diff --git a/ssl/test/async_bio.cc b/ssl/test/async_bio.cc
+index 965a0fb..825b223 100644
+--- a/ssl/test/async_bio.cc
++++ b/ssl/test/async_bio.cc
+@@ -22,8 +22,6 @@
+ 
+ namespace {
+ 
+-extern BIO_METHOD g_async_bio_method;
+-
+ struct AsyncBio {
+   bool datagram;
+   bool enforce_write_quota;
+@@ -32,20 +30,26 @@ struct AsyncBio {
+ };
+ 
+ AsyncBio *GetData(BIO *bio) {
++  /*
++   * TODO: Missing accessor? This probably needs a BIO_get_method() in OpenSSL
++   *       For now skip this check
++   */
++#if 0
+   if (bio->method != &g_async_bio_method) {
+     return NULL;
+   }
+-  return (AsyncBio *)bio->ptr;
++#endif
++  return (AsyncBio *)BIO_get_data(bio);
+ }
+ 
+ static int AsyncWrite(BIO *bio, const char *in, int inl) {
+   AsyncBio *a = GetData(bio);
+-  if (a == NULL || bio->next_bio == NULL) {
++  if (a == NULL || BIO_next(bio) == NULL) {
+     return 0;
+   }
+ 
+   if (!a->enforce_write_quota) {
+-    return BIO_write(bio->next_bio, in, inl);
++    return BIO_write(BIO_next(bio), in, inl);
+   }
+ 
+   BIO_clear_retry_flags(bio);
+@@ -59,7 +63,7 @@ static int AsyncWrite(BIO *bio, const char *in, int inl) {
+   if (!a->datagram && (size_t)inl > a->write_quota) {
+     inl = a->write_quota;
+   }
+-  int ret = BIO_write(bio->next_bio, in, inl);
++  int ret = BIO_write(BIO_next(bio), in, inl);
+   if (ret <= 0) {
+     BIO_copy_next_retry(bio);
+   } else {
+@@ -70,7 +74,7 @@ static int AsyncWrite(BIO *bio, const char *in, int inl) {
+ 
+ static int AsyncRead(BIO *bio, char *out, int outl) {
+   AsyncBio *a = GetData(bio);
+-  if (a == NULL || bio->next_bio == NULL) {
++  if (a == NULL || BIO_next(bio) == NULL) {
+     return 0;
+   }
+ 
+@@ -85,7 +89,7 @@ static int AsyncRead(BIO *bio, char *out, int outl) {
+   if (!a->datagram && (size_t)outl > a->read_quota) {
+     outl = a->read_quota;
+   }
+-  int ret = BIO_read(bio->next_bio, out, outl);
++  int ret = BIO_read(BIO_next(bio), out, outl);
+   if (ret <= 0) {
+     BIO_copy_next_retry(bio);
+   } else {
+@@ -95,11 +99,11 @@ static int AsyncRead(BIO *bio, char *out, int outl) {
+ }
+ 
+ static long AsyncCtrl(BIO *bio, int cmd, long num, void *ptr) {
+-  if (bio->next_bio == NULL) {
++  if (BIO_next(bio) == NULL) {
+     return 0;
+   }
+   BIO_clear_retry_flags(bio);
+-  int ret = BIO_ctrl(bio->next_bio, cmd, num, ptr);
++  int ret = BIO_ctrl(BIO_next(bio), cmd, num, ptr);
+   BIO_copy_next_retry(bio);
+   return ret;
+ }
+@@ -111,8 +115,8 @@ static int AsyncNew(BIO *bio) {
+   }
+   memset(a, 0, sizeof(*a));
+   a->enforce_write_quota = true;
+-  bio->init = 1;
+-  bio->ptr = (char *)a;
++  BIO_set_init(bio, 1);
++  BIO_set_data(bio, a);
+   return 1;
+ }
+ 
+@@ -121,41 +125,45 @@ static int AsyncFree(BIO *bio) {
+     return 0;
+   }
+ 
+-  OPENSSL_free(bio->ptr);
+-  bio->ptr = NULL;
+-  bio->init = 0;
+-  bio->flags = 0;
++  OPENSSL_free(BIO_get_data(bio));
++  BIO_set_data(bio, NULL);
++  BIO_set_init(bio, 0);
+   return 1;
+ }
+ 
+ static long AsyncCallbackCtrl(BIO *bio, int cmd, bio_info_cb fp) {
+-  if (bio->next_bio == NULL) {
++  if (BIO_next(bio) == NULL) {
+     return 0;
+   }
+-  return BIO_callback_ctrl(bio->next_bio, cmd, fp);
++  return BIO_callback_ctrl(BIO_next(bio), cmd, fp);
+ }
+ 
+-BIO_METHOD g_async_bio_method = {
+-  BIO_TYPE_FILTER,
+-  "async bio",
+-  AsyncWrite,
+-  AsyncRead,
+-  NULL /* puts */,
+-  NULL /* gets */,
+-  AsyncCtrl,
+-  AsyncNew,
+-  AsyncFree,
+-  AsyncCallbackCtrl,
+-};
++static BIO_METHOD *g_async_bio_method = NULL;
++
++static const BIO_METHOD *AsyncMethod(void)
++{
++  if (g_async_bio_method == NULL) {
++    g_async_bio_method = BIO_meth_new(BIO_TYPE_FILTER, "async bio");
++    if (   g_async_bio_method == NULL
++        || !BIO_meth_set_write(g_async_bio_method, AsyncWrite)
++        || !BIO_meth_set_read(g_async_bio_method, AsyncRead)
++        || !BIO_meth_set_ctrl(g_async_bio_method, AsyncCtrl)
++        || !BIO_meth_set_create(g_async_bio_method, AsyncNew)
++        || !BIO_meth_set_destroy(g_async_bio_method, AsyncFree)
++        || !BIO_meth_set_callback_ctrl(g_async_bio_method, AsyncCallbackCtrl))
++    return NULL;
++  }
++  return g_async_bio_method;
++}
+ 
+ }  // namespace
+ 
+ ScopedBIO AsyncBioCreate() {
+-  return ScopedBIO(BIO_new(&g_async_bio_method));
++  return ScopedBIO(BIO_new(AsyncMethod()));
+ }
+ 
+ ScopedBIO AsyncBioCreateDatagram() {
+-  ScopedBIO ret(BIO_new(&g_async_bio_method));
++  ScopedBIO ret(BIO_new(AsyncMethod()));
+   if (!ret) {
+     return nullptr;
+   }
+diff --git a/ssl/test/bssl_shim.cc b/ssl/test/bssl_shim.cc
+index 7de6aa3..f94c8e6 100644
+--- a/ssl/test/bssl_shim.cc
++++ b/ssl/test/bssl_shim.cc
+@@ -237,7 +237,7 @@ static int VerifySucceed(X509_STORE_CTX *store_ctx, void *arg) {
+ }
+ 
+ static int VerifyFail(X509_STORE_CTX *store_ctx, void *arg) {
+-  store_ctx->error = X509_V_ERR_APPLICATION_VERIFICATION;
++  X509_STORE_CTX_set_error(store_ctx, X509_V_ERR_APPLICATION_VERIFICATION);
+   return 0;
+ }
+ 
+@@ -516,27 +516,42 @@ static ScopedSSL_CTX SetupCtx(const TestConfig *config) {
+     return nullptr;
+   }
+ 
+-  ScopedDH dh(DH_get_2048_256());
++  DH *tmpdh;
+ 
+   if (config->use_sparse_dh_prime) {
++    BIGNUM *p, *g;
++    p = BN_new();
++    g = BN_new();
++    tmpdh = DH_new();
++    if (p == NULL || g == NULL || tmpdh == NULL) {
++        BN_free(p);
++        BN_free(g);
++        DH_free(tmpdh);
++        return nullptr;
++    }
+     // This prime number is 2^1024 + 643 – a value just above a power of two.
+     // Because of its form, values modulo it are essentially certain to be one
+     // byte shorter. This is used to test padding of these values.
+     if (BN_hex2bn(
+-            &dh->p,
++            &p,
+             "1000000000000000000000000000000000000000000000000000000000000000"
+             "0000000000000000000000000000000000000000000000000000000000000000"
+             "0000000000000000000000000000000000000000000000000000000000000000"
+             "0000000000000000000000000000000000000000000000000000000000000028"
+             "3") == 0 ||
+-        !BN_set_word(dh->g, 2)) {
++        !BN_set_word(g, 2)) {
++      BN_free(p);
++      BN_free(g);
++      DH_free(tmpdh);
+       return nullptr;
+     }
+-    BN_free(dh->q);
+-    dh->q = NULL;
+-    dh->length = 0;
++    DH_set0_pqg(tmpdh, p, NULL, g);
++  } else {
++      tmpdh = DH_get_2048_256();
+   }
+ 
++  ScopedDH dh(tmpdh);
++
+   if (!dh || !SSL_CTX_set_tmp_dh(ssl_ctx.get(), dh.get())) {
+     return nullptr;
+   }
+diff --git a/ssl/test/packeted_bio.cc b/ssl/test/packeted_bio.cc
+index dd97df1..824c427 100644
+--- a/ssl/test/packeted_bio.cc
++++ b/ssl/test/packeted_bio.cc
+@@ -24,8 +24,6 @@
+ 
+ namespace {
+ 
+-extern BIO_METHOD g_packeted_bio_method;
+-
+ const uint8_t kOpcodePacket = 'P';
+ const uint8_t kOpcodeTimeout = 'T';
+ 
+@@ -48,7 +46,7 @@ static int ReadAll(BIO *bio, uint8_t *out, size_t len) {
+ }
+ 
+ static int PacketedWrite(BIO *bio, const char *in, int inl) {
+-  if (bio->next_bio == NULL) {
++  if (BIO_next(bio) == NULL) {
+     return 0;
+   }
+ 
+@@ -61,14 +59,14 @@ static int PacketedWrite(BIO *bio, const char *in, int inl) {
+   header[2] = (inl >> 16) & 0xff;
+   header[3] = (inl >> 8) & 0xff;
+   header[4] = inl & 0xff;
+-  int ret = BIO_write(bio->next_bio, header, sizeof(header));
++  int ret = BIO_write(BIO_next(bio), header, sizeof(header));
+   if (ret <= 0) {
+     BIO_copy_next_retry(bio);
+     return ret;
+   }
+ 
+   // Write the buffer.
+-  ret = BIO_write(bio->next_bio, in, inl);
++  ret = BIO_write(BIO_next(bio), in, inl);
+   if (ret < 0 || (inl > 0 && ret == 0)) {
+     BIO_copy_next_retry(bio);
+     return ret;
+@@ -78,7 +76,7 @@ static int PacketedWrite(BIO *bio, const char *in, int inl) {
+ }
+ 
+ static int PacketedRead(BIO *bio, char *out, int outl) {
+-  if (bio->next_bio == NULL) {
++  if (BIO_next(bio) == NULL) {
+     return 0;
+   }
+ 
+@@ -86,7 +84,7 @@ static int PacketedRead(BIO *bio, char *out, int outl) {
+ 
+   // Read the opcode.
+   uint8_t opcode;
+-  int ret = ReadAll(bio->next_bio, &opcode, sizeof(opcode));
++  int ret = ReadAll(BIO_next(bio), &opcode, sizeof(opcode));
+   if (ret <= 0) {
+     BIO_copy_next_retry(bio);
+     return ret;
+@@ -104,7 +102,7 @@ static int PacketedRead(BIO *bio, char *out, int outl) {
+ 
+   // Read the length prefix.
+   uint8_t len_bytes[4];
+-  ret = ReadAll(bio->next_bio, len_bytes, sizeof(len_bytes));
++  ret = ReadAll(BIO_next(bio), len_bytes, sizeof(len_bytes));
+   if (ret <= 0) {
+     BIO_copy_next_retry(bio);
+     return ret;
+@@ -116,7 +114,7 @@ static int PacketedRead(BIO *bio, char *out, int outl) {
+   if (buf == NULL) {
+     return -1;
+   }
+-  ret = ReadAll(bio->next_bio, buf, len);
++  ret = ReadAll(BIO_next(bio), buf, len);
+   if (ret <= 0) {
+     fprintf(stderr, "Packeted BIO was truncated\n");
+     return -1;
+@@ -131,17 +129,17 @@ static int PacketedRead(BIO *bio, char *out, int outl) {
+ }
+ 
+ static long PacketedCtrl(BIO *bio, int cmd, long num, void *ptr) {
+-  if (bio->next_bio == NULL) {
++  if (BIO_next(bio) == NULL) {
+     return 0;
+   }
+   BIO_clear_retry_flags(bio);
+-  int ret = BIO_ctrl(bio->next_bio, cmd, num, ptr);
++  int ret = BIO_ctrl(BIO_next(bio), cmd, num, ptr);
+   BIO_copy_next_retry(bio);
+   return ret;
+ }
+ 
+ static int PacketedNew(BIO *bio) {
+-  bio->init = 1;
++  BIO_set_init(bio, 1);
+   return 1;
+ }
+ 
+@@ -150,37 +148,42 @@ static int PacketedFree(BIO *bio) {
+     return 0;
+   }
+ 
+-  bio->init = 0;
++  BIO_set_init(bio, 0);
+   return 1;
+ }
+ 
+ static long PacketedCallbackCtrl(BIO *bio, int cmd, bio_info_cb fp) {
+-  if (bio->next_bio == NULL) {
++  if (BIO_next(bio) == NULL) {
+     return 0;
+   }
+-  return BIO_callback_ctrl(bio->next_bio, cmd, fp);
++  return BIO_callback_ctrl(BIO_next(bio), cmd, fp);
+ }
+ 
+-BIO_METHOD g_packeted_bio_method = {
+-  BIO_TYPE_FILTER,
+-  "packeted bio",
+-  PacketedWrite,
+-  PacketedRead,
+-  NULL /* puts */,
+-  NULL /* gets */,
+-  PacketedCtrl,
+-  PacketedNew,
+-  PacketedFree,
+-  PacketedCallbackCtrl,
+-};
+-
++static BIO_METHOD *g_packeted_bio_method = NULL;
++
++static const BIO_METHOD *PacketedMethod(void)
++{
++  if (g_packeted_bio_method == NULL) {
++    g_packeted_bio_method = BIO_meth_new(BIO_TYPE_FILTER, "packeted bio");
++    if (   g_packeted_bio_method == NULL
++        || !BIO_meth_set_write(g_packeted_bio_method, PacketedWrite)
++        || !BIO_meth_set_read(g_packeted_bio_method, PacketedRead)
++        || !BIO_meth_set_ctrl(g_packeted_bio_method, PacketedCtrl)
++        || !BIO_meth_set_create(g_packeted_bio_method, PacketedNew)
++        || !BIO_meth_set_destroy(g_packeted_bio_method, PacketedFree)
++        || !BIO_meth_set_callback_ctrl(g_packeted_bio_method,
++                                       PacketedCallbackCtrl))
++    return NULL;
++  }
++  return g_packeted_bio_method;
++}
+ }  // namespace
+ 
+ ScopedBIO PacketedBioCreate(timeval *out_timeout) {
+-  ScopedBIO bio(BIO_new(&g_packeted_bio_method));
++  ScopedBIO bio(BIO_new(PacketedMethod()));
+   if (!bio) {
+     return nullptr;
+   }
+-  bio->ptr = out_timeout;
++  BIO_set_data(bio.get(), out_timeout);
+   return bio;
+ }
+-- 
+2.7.4
+
