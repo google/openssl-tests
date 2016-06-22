@@ -1,7 +1,7 @@
 all: ossl_shim
 
-ossl_shim: openssl
-	g++ -std=c++11 -Iopenssl/include boringssl/ssl/test/*.cc \
+ossl_shim: openssl boringssl/ssl/test/*.cc
+	g++ -g -std=c++11 -Iopenssl/include boringssl/ssl/test/*.cc \
 	openssl/libssl.a openssl/libcrypto.a -ldl -lpthread \
 	-o ossl_shim
 

@@ -16,6 +16,9 @@ OpenSSL and BoringSSL are provided as git submodules. This means that,
 by default, they're checked out to a specific git commit at which the
 patch and build are known to work.
 
+Please check the openssl INSTALL file for build pre-requisites. You will
+also need "go" installed.
+
 ## Build instructions ##
 
 1. Initialize the OpenSSL and BoringSSL submodules:
@@ -28,7 +31,9 @@ patch and build are known to work.
 2. Configure OpenSSL
 
     ```
-    $ cd openssl && ./config && cd ..
+    $ cd openssl
+    $ ./config enable-ssl3 enable-ssl3-method enable-weak-ssl-ciphers
+    $ cd ..
     ```
 
 3. Patch BoringSSL
@@ -60,4 +65,11 @@ original state, do:
     ```
     $ git submodule update
     ```
+
+* To run a single test:
+
+    ````
+    $ cd boringssl/ssl/test/runner
+    $ go test -shim-path ../../../../ossl_shim -pipe -test TestName
+    ````
 
